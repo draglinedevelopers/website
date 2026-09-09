@@ -170,14 +170,14 @@ export default function Page() {
       </section>
 
       {/* CTA banner */}
-      <section className="bg-accent text-accent-ink">
+      <section className="bg-highlight text-dragline-black">
         <div className="container py-16 md:py-24 text-center">
           <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight">
             Ready to build something serious?
           </h2>
           <Link
             href="/contact"
-            className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-accent-ink text-accent px-6 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-dragline-black text-highlight px-6 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
           >
             Start a Conversation
           </Link>
