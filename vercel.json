@@ -2,7 +2,6 @@
   "version": 2,
   "cleanUrls": true,
 
-  "installCommand": "pnpm install --no-frozen-lockfile",
   "headers": [
     {
       "source": "/(.*)",
