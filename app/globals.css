@@ -28,13 +28,13 @@
   --ink: #0f0f0f;
   --ink-muted: #5c5c58;
   --line: rgba(15, 15, 15, 0.12);
-  /* Electric Yellow reads acidic on a light surface, so light mode's block accent
-     switches to the brand's deep coral instead (see design-system §3.3's "Expressive"
-     combination). Same role as dark mode's yellow: solid blocks/buttons only. */
-  --accent: #93291a;
-  --accent-ink: #ffffff;
-  --highlight: #93291a;
-  --sage-text: #305349;
+  /* Same accent values as dark mode, by request. Note: Electric Yellow, Coral, and Sage
+     all fall well under WCAG AA contrast (4.5:1) as text/rings/buttons against this
+     light surface, see git history for the theme-safe alternative these replaced. */
+  --accent: #eefe53;
+  --accent-ink: #0f0f0f;
+  --highlight: #e2766c;
+  --sage-text: #a5bcb6;
 }
 
 html,
