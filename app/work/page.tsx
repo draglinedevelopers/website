@@ -1,20 +1,73 @@
 import Link from 'next/link'
-export const metadata = { title: 'Work' }
+import PageHero from '@/components/PageHero'
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
+
+export const metadata = {
+  title: 'Work',
+  description: 'A selection of Dragline Developers projects across our practice areas.',
+}
+
 const cases = [
-  { slug:'case-1', title:'Case Study One (Placeholder)', summary:'A structured case study placeholder without fabricated metrics.'},
-  { slug:'case-2', title:'Case Study Two (Placeholder)', summary:'Outline of problem, approach, outcome with verifiable facts only.'},
+  {
+    slug: 'operations-system-food-business',
+    category: 'Automation & Business Systems',
+    title: 'Operations System for a Food Business',
+    context: 'Internal - Dragline Operational Use',
+    problem: 'A food business operating across multiple payment channels (cash, card, bank transfer) had no unified view of inventory, sales, or revenue. Everything was managed manually and reconciled by hand.',
+    outcome: 'Designed and implemented an integrated operations system covering real-time inventory tracking, multi-channel sales data, and automated payment reconciliation across all payment methods.',
+  },
 ]
+
 export default function WorkPage() {
   return (
-    <div className="container py-12 space-y-6">
-      <h1 className="text-3xl font-bold">Selected Work</h1>
-      <div className="grid md:grid-cols-2 gap-6">
-        {cases.map(c => (
-          <Link key={c.slug} href={`/work/${c.slug}`} className="no-underline border rounded-xl p-6 hover:bg-gray-50">
-            <div className="font-semibold">{c.title}</div>
-            <p className="text-gray-700 mt-2">{c.summary}</p>
+    <div>
+      <PageHero eyebrow="Work" title="What We've Built">
+        A selection of projects across our practice areas.
+      </PageHero>
+
+      <div className="container py-16 md:py-20 grid gap-5">
+        {cases.map((c) => (
+          <Link
+            key={c.slug}
+            href={`/work/${c.slug}`}
+            className="group rounded-lg border border-line overflow-hidden hover:border-ink transition-colors"
+          >
+            <div className="grid md:grid-cols-2">
+              <div className="p-8 md:p-10">
+                <span className="font-mono-label text-ink-muted">{c.category}</span>
+                <h2 className="mt-3 font-display text-2xl font-semibold">{c.title}</h2>
+                <p className="mt-2 text-sm text-ink-muted">{c.context}</p>
+                <p className="mt-4 text-ink-muted max-w-md">{c.problem}</p>
+                <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
+                  View Project <ArrowUpRight size={14} />
+                </span>
+              </div>
+              <div className="relative aspect-[4/3] md:aspect-auto">
+                <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+                  <rect width="400" height="300" className="fill-paper" />
+                  <g className="stroke-line" strokeWidth="1">
+                    <line x1="0" y1="75" x2="400" y2="75" />
+                    <line x1="0" y1="150" x2="400" y2="150" />
+                    <line x1="0" y1="225" x2="400" y2="225" />
+                    <line x1="100" y1="0" x2="100" y2="300" />
+                    <line x1="200" y1="0" x2="200" y2="300" />
+                    <line x1="300" y1="0" x2="300" y2="300" />
+                  </g>
+                  <rect x="40" y="180" width="40" height="70" className="fill-accent" />
+                  <rect x="120" y="120" width="40" height="130" className="fill-sage" />
+                  <rect x="200" y="150" width="40" height="100" className="fill-ink-muted" />
+                  <rect x="280" y="90" width="40" height="160" className="fill-highlight" />
+                </svg>
+              </div>
+            </div>
           </Link>
         ))}
+      </div>
+
+      <div className="container pb-16 md:pb-20">
+        <Link href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
+          Working on something? Let&apos;s talk. &rarr;
+        </Link>
       </div>
     </div>
   )

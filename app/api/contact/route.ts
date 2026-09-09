@@ -2,20 +2,20 @@ import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
 export async function POST(request: Request) {
-  const form = await request.formData()
-  const name = String(form.get('name') ?? '').trim()
-  const email = String(form.get('email') ?? '').trim()
-  const message = String(form.get('message') ?? '').trim()
-  const company = String(form.get('company') ?? '').trim() // honeypot
+  const body = await request.json()
+  const name = String(body.name ?? '').trim()
+  const email = String(body.email ?? '').trim()
+  const company = String(body.company ?? '').trim()
+  const message = String(body.message ?? '').trim()
+  const howHeard = String(body.howHeard ?? '').trim()
+  const honeypot = String(body.company_website ?? '').trim() // honeypot
 
-  // If honeypot is filled, silently succeed
-  if (company) {
-    return NextResponse.redirect(new URL('/thank-you', request.url), 303)
+  if (honeypot) {
+    return NextResponse.json({ ok: true })
   }
 
-  // Basic validation safeguard (fields are already required client-side)
-  if (!name || !email || !message) {
-    return NextResponse.redirect(new URL('/thank-you', request.url), 303)
+  if (!name || !email || !company || !message) {
+    return NextResponse.json({ ok: false, error: 'Please fill in all required fields.' }, { status: 400 })
   }
 
   const resendApiKey = process.env.RESEND_API_KEY
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     const recipientsEnv = process.env.CONTACT_RECIPIENTS
     const recipients = recipientsEnv
       ? recipientsEnv.split(',').map(s => s.trim()).filter(Boolean)
-      : ['draglinedevelopers@gmail.com', 'hello@draglinedevelopers.com']
+      : ['info@draglinedevelopers.com']
     try {
       await resend.emails.send({
         from: 'contact@draglinedevelopers.com',
@@ -38,23 +38,25 @@ export async function POST(request: Request) {
             <div style="background:#f7f7f7;padding:12px;border-radius:8px;">
               <p><strong>Name:</strong> ${escapeHtml(name)}</p>
               <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+              <p><strong>Company:</strong> ${escapeHtml(company)}</p>
+              ${howHeard ? `<p><strong>How they heard about us:</strong> ${escapeHtml(howHeard)}</p>` : ''}
               <p><strong>Message:</strong></p>
               <pre style="white-space:pre-wrap;word-wrap:break-word;margin:0;">${escapeHtml(message)}</pre>
             </div>
           </div>
         `,
-        text: `New contact submission\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+        text: `New contact submission\n\nName: ${name}\nEmail: ${email}\nCompany: ${company}\n${howHeard ? `How they heard about us: ${howHeard}\n` : ''}\nMessage:\n${message}`,
       })
     } catch (err) {
       console.error('Failed to send contact email', err)
-      // Intentionally continue to redirect so the user sees thank-you
+      return NextResponse.json({ ok: false, error: 'Something went wrong sending your message. Please try again.' }, { status: 502 })
     }
   } else {
     console.error('RESEND_API_KEY missing; skipping email send')
+    return NextResponse.json({ ok: false, error: 'Something went wrong sending your message. Please try again.' }, { status: 500 })
   }
 
-  // Redirect to thank-you page after POST
-  return NextResponse.redirect(new URL('/thank-you', request.url), 303)
+  return NextResponse.json({ ok: true })
 }
 
 function escapeHtml(input: string) {

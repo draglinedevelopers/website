@@ -3,6 +3,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
+import PageHero from '@/components/PageHero'
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
 type Post = {
   slug: string
@@ -25,7 +27,7 @@ function getPosts(): Post[] {
       excerpt: data.excerpt ?? '',
       readingTime: readingTime(content).text
     }
-  }).sort((a,b) => (a.date < b.date ? 1 : -1))
+  }).sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 export const metadata = { title: 'Blog' }
@@ -33,14 +35,21 @@ export const metadata = { title: 'Blog' }
 export default function BlogPage() {
   const posts = getPosts()
   return (
-    <div className="container py-12 space-y-6">
-      <h1 className="text-3xl font-bold">Insights & Updates</h1>
-      <div className="grid md:grid-cols-2 gap-6">
-        {posts.map(p => (
-          <Link key={p.slug} href={`/blog/${p.slug}`} className="no-underline border rounded-xl p-6 hover:bg-gray-50">
-            <div className="text-sm text-gray-500">{p.date} · {p.readingTime}</div>
-            <div className="font-semibold mt-1">{p.title}</div>
-            <p className="text-gray-700 mt-2">{p.excerpt}</p>
+    <div>
+      <PageHero eyebrow="Blog" title="Insights & updates" />
+      <div className="container py-16 md:py-20 grid md:grid-cols-2 gap-5">
+        {posts.map((p) => (
+          <Link
+            key={p.slug}
+            href={`/blog/${p.slug}`}
+            className="group rounded-lg border border-line p-8 hover:border-ink transition-colors"
+          >
+            <div className="font-mono-label text-ink-muted">{p.date} · {p.readingTime}</div>
+            <div className="mt-3 flex items-start justify-between gap-4">
+              <div className="font-semibold">{p.title}</div>
+              <ArrowUpRight size={18} className="shrink-0 text-ink-muted group-hover:text-ink" />
+            </div>
+            <p className="mt-2 text-sm text-ink-muted">{p.excerpt}</p>
           </Link>
         ))}
       </div>

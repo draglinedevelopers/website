@@ -1,16 +1,33 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import { Button } from './Button'
+
 export default function Hero() {
   return (
-    <section className="relative min-h-[420px] sm:min-h-[520px]">
-      <Image src="/assets/4.png" alt="" priority fill sizes="100vw" className="object-cover" />
-      <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
-      <div className="container relative z-10 py-16 md:py-24 text-white">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight max-w-3xl">Build software your business can rely on.</h1>
-        <p className="mt-4 text-lg text-white/80 max-w-2xl">We help founders and teams plan, design, and ship production grade apps with clean code, clear communication, and predictable delivery.</p>
-        <div className="mt-6 flex gap-3">
-          <Link href="/contact" className="inline-flex items-center px-4 py-2 rounded-xl border border-white/70 text-white no-underline hover:bg-red-900">Start a project</Link>
-          {/* <Link href="/work" className="inline-flex items-center px-4 py-2 rounded-xl border border-white/70 text-white no-underline hover:bg-white hover:text-black">See our work</Link> */}
+    <section className="border-b border-line">
+      <div className="container grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center pt-14 pb-16 md:pt-20 md:pb-20">
+        <div>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+            We build the technology businesses run on.
+          </h1>
+          <p className="mt-6 text-lg text-ink-muted max-w-xl">
+            Dragline is a technology company that designs, builds, and automates the digital
+            infrastructure behind growing businesses, from product to payments to AI.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button href="/work">See Our Work</Button>
+            <Button href="/contact" variant="secondary">Get In Touch</Button>
+          </div>
+        </div>
+
+        <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-line">
+          <Image
+            src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?auto=format&fit=crop&w=1600&q=80"
+            alt="Minimal abstract composition of floating geometric cubes with glowing yellow spheres"
+            fill
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="object-cover"
+            priority
+          />
         </div>
       </div>
     </section>

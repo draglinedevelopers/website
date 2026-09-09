@@ -1,210 +1,93 @@
+import Link from 'next/link'
+import PageHero from '@/components/PageHero'
+import { User } from '@phosphor-icons/react/dist/ssr'
+
 export const metadata = {
   title: 'About',
+  description: 'Why Dragline Developers exists, what we believe, and the team behind the work.',
 }
+
+const team = [
+  { role: 'CEO', dept: 'AI Automation & Strategy' },
+  { role: 'COO', dept: 'Operations & Delivery' },
+  { role: 'CTO', dept: 'Engineering & Technical Architecture' },
+  { role: 'Lead Product Designer', dept: 'Design & User Experience' },
+]
+
+const principles = [
+  {
+    title: 'Business first, technology second.',
+    desc: "We don't recommend tools we can't justify. Every solution maps to a real business outcome. If something doesn't make the business better, we won't build it.",
+  },
+  {
+    title: 'Small teams, serious work.',
+    desc: "We don't use team size as a proxy for quality. We use results. Every project gets senior attention, not handoffs down a chain.",
+  },
+  {
+    title: 'We build for ourselves too.',
+    desc: "Dragline's own products are built on the same systems we build for clients. We have skin in the game. If it doesn't hold up under our own use, it doesn't go to a client.",
+  },
+]
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
+    <div>
+      <PageHero eyebrow="About" title="Why Dragline Exists" />
 
-        <div className="container mx-auto px-6 py-20 sm:py-28">
-          <div className="max-w-3xl">
-            <p className="text-sm tracking-widest uppercase text-black">About</p>
-            <h1 className="mt-3 text-4xl/tight font-semibold sm:text-5xl">
-              Senior-led engineering focused on clarity, craft, and reliability.
-            </h1>
-            <p className="mt-5 text-lg text-black">
-              Dragline Developers is a lean team partnering with founders and product leaders to
-              ship durable software designed to scale, measured by real business outcomes, and
-              supported for the long run.
-            </p>
-          </div>
-
-          {/* Mini stats */}
-          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
-            <Stat kpi="95%" label="On-time Delivery" />
-            <Stat kpi="99.9%" label="Uptime Targets" />
-            <Stat kpi="∞" label="Partnership Mindset" />
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="container mx-auto px-6 py-16">
-        <h2 className="text-2xl font-semibold">What We Stand For</h2>
-        <p className="mt-3 max-w-3xl text-black">
-          We keep teams small, communication crisp, and quality non-negotiable. These values guide
-          every engagement.
+      <section className="container py-16 md:py-20 space-y-5 max-w-2xl">
+        <p className="text-ink-muted">
+          Dragline was built on a simple observation: most technology companies build what they
+          know how to build, not what a business actually needs. The result is expensive tools
+          that don&apos;t fit, integrations that break, and founders who know less about their own
+          systems than their vendors do.
         </p>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card
-            title="Clarity"
-            body="Transparent planning, honest timelines, and documentation that reduces noise. From roadmap to release, you always know the why and the what."
-            icon={
-              <IconOutline
-                d="M4 12h16M4 6h16M4 18h16"
-                ariaLabel="menu lines"
-              />
-            }
-          />
-          <Card
-            title="Craft"
-            body="Clean, maintainable code and accessible interfaces. We combine modern tooling with timeless engineering discipline."
-            icon={
-              <IconOutline
-                d="M12 6v12m6-6H6"
-                ariaLabel="plus sign"
-              />
-            }
-          />
-          <Card
-            title="Reliability"
-            body="Predictable delivery, proactive maintenance, and long-term support. Stability and performance are built in, not bolted on."
-            icon={
-              <IconOutline
-                d="M4 12l4 4 8-8"
-                ariaLabel="check"
-              />
-            }
-          />
-        </div>
+        <p className="text-ink-muted">
+          We started Dragline to do it differently. We sit with the business problem first. We
+          understand the customer, the operation, the market. Then we build, whether that&apos;s a
+          product, an automation, a design system, or a strategic roadmap.
+        </p>
+        <p className="text-ink-muted">
+          The name is deliberate. The dragline thread is the strongest silk a spider produces: the
+          one it uses to navigate, build, and connect to its world. That&apos;s what we do for the
+          businesses we work with.
+        </p>
       </section>
 
-      {/* Approach */}
-      <section className="border-t border-zinc-800/60">
-        <div className="container mx-auto px-6 py-16">
-          <h2 className="text-2xl font-semibold">Our Approach</h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <ApproachItem
-              title="Lean & Senior-Led"
-              desc="Small teams of experienced engineers, no heavy hand-offs, no bloated org charts."
-            />
-            <ApproachItem
-              title="Full Lifecycle Delivery"
-              desc="Product, design, backend, frontend, and infra. One team accountable from concept to run-time."
-            />
-            <ApproachItem
-              title="Scalable & Future-Proof"
-              desc="Architected for growth: observability, testing, and DX baked into the stack."
-            />
-            <ApproachItem
-              title="Client as Partner"
-              desc="We work with you, not just for you, treating your outcomes as our KPI."
-            />
+      <section className="border-t border-line bg-surface">
+        <div className="container py-16 md:py-20">
+          <h2 className="font-display text-2xl font-bold tracking-tight">The Team</h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2">
+            {team.map((t) => (
+              <div key={t.role} className="rounded-lg border border-line p-6 flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line text-ink-muted">
+                  <User size={22} weight="regular" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">{t.role}</h3>
+                  <p className="mt-1 text-sm text-ink-muted">{t.dept}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Philosophy / Promise */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Our Promise</h2>
-          <p className="mt-4 text-black">
-            We don’t aim to ship the most features—we aim to ship the right ones, built right.
-            Our philosophy is simple: build once, build well, and support it for the long term.
-            That’s how we create systems that last and relationships that matter.
-          </p>
+      <section className="container py-16 md:py-20">
+        <h2 className="font-display text-2xl font-bold tracking-tight">What We Believe</h2>
+        <div className="mt-8 grid gap-8 md:grid-cols-3">
+          {principles.map((p) => (
+            <div key={p.title}>
+              <h3 className="font-semibold">{p.title}</h3>
+              <p className="mt-2 text-sm text-ink-muted">{p.desc}</p>
+            </div>
+          ))}
         </div>
-
-        {/* CTA */}
         <div className="mt-10">
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-700 bg-white px-5 py-3 text-sm font-medium hover:bg-red-900 hover:text-white transition"
-          >
-            Start a conversation
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              className="opacity-80"
-              aria-hidden="true"
-            >
-              <path
-                d="M5 12h14M13 5l7 7-7 7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
+          <Link href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
+            Want to know more? Come talk to us. &rarr;
+          </Link>
         </div>
       </section>
-    </main>
-  )
-}
-
-/* ---------- Small presentational components (no external deps) ---------- */
-
-function Stat({ kpi, label }: { kpi: string; label: string }) {
-  return (
-    <div className="rounded-2xl border border-zinc-800 bg-blue-800 p-5">
-      <div className="text-3xl font-semibold text-white">{kpi}</div>
-      <div className="mt-1 text-sm text-white">{label}</div>
     </div>
-  )
-}
-
-function Card({
-  title,
-  body,
-  icon,
-}: {
-  title: string
-  body: string
-  icon?: React.ReactNode
-}) {
-  return (
-    <div className="group rounded-2xl border border-zinc-800 p-6 transition hover:border-zinc-700">
-      <div className="flex items-start gap-3">
-        <div className="rounded-xl border border-zinc-800 p-2 text-black">
-          {icon}
-        </div>
-        <div>
-          <h3 className="text-lg font-medium">{title}</h3>
-          <p className="mt-2 text-sm text-black">{body}</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function ApproachItem({ title, desc }: { title: string; desc: string }) {
-  return (
-    <div className="rounded-2xl border border-zinc-800 p-6">
-      <h3 className="text-base font-medium">{title}</h3>
-      <p className="mt-2 text-sm text-black">{desc}</p>
-    </div>
-  )
-}
-
-function IconOutline({
-  d,
-  ariaLabel,
-}: {
-  d: string
-  ariaLabel: string
-}) {
-  return (
-    <svg
-      aria-label={ariaLabel}
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      className="block"
-    >
-      <path
-        d={d}
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   )
 }

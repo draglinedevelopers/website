@@ -31,6 +31,13 @@ coverage/
 .vscode/
 .idea/
 
+# Claude Code local tooling
+.claude/
+
+# Internal-only reference docs (not for version control)
+Dragline_Website_Build_Document.pdf
+dragline design system.md
+
 # Caches
 .eslintcache
 .turbo/

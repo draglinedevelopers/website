@@ -1,32 +1,34 @@
 import { notFound } from 'next/navigation'
+import PageHero from '@/components/PageHero'
 
-const cases: Record<string, {title:string, problem:string, approach:string, outcome:string}> = {
-  'case-1': {
-    title: 'Case Study One (Placeholder)',
-    problem: 'Clear, testable problem statement (to be filled with real data).',
-    approach: 'Our approach—architecture, stack, and process (no fake metrics).',
-    outcome: 'Verifiable outcomes; if unknown, leave as TBD and request facts.'
+const cases: Record<string, { title: string; category: string; context: string; problem: string; outcome: string }> = {
+  'operations-system-food-business': {
+    title: 'Operations System for a Food Business',
+    category: 'Automation & Business Systems',
+    context: 'Internal - Dragline Operational Use',
+    problem: 'A food business operating across multiple payment channels (cash, card, bank transfer) had no unified view of inventory, sales, or revenue. Everything was managed manually and reconciled by hand.',
+    outcome: 'Designed and implemented an integrated operations system covering real-time inventory tracking, multi-channel sales data, and automated payment reconciliation across all payment methods.',
   },
-  'case-2': {
-    title: 'Case Study Two (Placeholder)',
-    problem: 'Problem statement for the second case study.',
-    approach: 'Describe steps, constraints, and decisions made.',
-    outcome: 'Outcomes aligned with facts; no invented numbers.'
-  }
 }
 
-export default function CasePage({ params }: { params: { slug: string }}) {
+export default function CasePage({ params }: { params: { slug: string } }) {
   const data = cases[params.slug]
   if (!data) return notFound()
   return (
-    <div className="container py-12 prose">
-      <h1>{data.title}</h1>
-      <h2>Problem</h2>
-      <p>{data.problem}</p>
-      <h2>Approach</h2>
-      <p>{data.approach}</p>
-      <h2>Outcome</h2>
-      <p>{data.outcome}</p>
+    <div>
+      <PageHero eyebrow={data.category} title={data.title}>
+        {data.context}
+      </PageHero>
+      <div className="container py-16 md:py-20 max-w-2xl space-y-10">
+        <div>
+          <h2 className="font-mono-label text-ink-muted">Problem</h2>
+          <p className="mt-3 text-ink">{data.problem}</p>
+        </div>
+        <div>
+          <h2 className="font-mono-label text-ink-muted">Outcome</h2>
+          <p className="mt-3 text-ink">{data.outcome}</p>
+        </div>
+      </div>
     </div>
   )
 }

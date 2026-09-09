@@ -1,15 +1,19 @@
-import Link from 'next/link'
+import { Button } from '@/components/Button'
+import { CheckCircle } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata = { title: 'Thank You' }
 
 export default function ThankYouPage() {
   return (
-    <div className="container py-12">
-      <h1 className="text-3xl font-bold">Thank you!</h1>
-      <p className="mt-2 text-gray-700">We received your message and we’ll get back to you shortly.</p>
-      <p className="mt-6">
-        <Link href="/" className="inline-flex items-center px-4 py-2 rounded-xl border no-underline">Return home</Link>
+    <div className="container py-24 md:py-32 text-center flex flex-col items-center">
+      <CheckCircle size={40} weight="regular" className="text-highlight" />
+      <h1 className="mt-5 font-display text-3xl md:text-4xl font-bold tracking-tight">Thank you</h1>
+      <p className="mt-3 text-ink-muted max-w-md">
+        We received your message and will get back to you shortly.
       </p>
+      <div className="mt-8">
+        <Button href="/" variant="secondary">Return home</Button>
+      </div>
     </div>
   )
 }

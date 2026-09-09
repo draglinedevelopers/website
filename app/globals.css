@@ -3,28 +3,108 @@
 @tailwind utilities;
 
 :root {
-  --radius: 1rem;
+  /* Dark is the default Dragline surface (see design system §15) */
+  --paper: #0f0f0f;
+  --surface: #171717;
+  --ink: #ffffff;
+  --ink-muted: #b5b5b0;
+  --line: rgba(255, 255, 255, 0.12);
+  /* Electric Yellow: solid blocks/buttons only (always paired with --accent-ink). */
+  --accent: #eefe53;
+  --accent-ink: #0f0f0f;
+  /* Coral: text links, icons, focus rings, anything read directly against the page background.
+     Electric Yellow fails contrast as text/rings on the light surface (see design-system §20),
+     so text-level highlighting uses this instead. Deepened to a terracotta shade in light mode
+     to clear WCAG AA against the off-white surface; the base coral already clears it on dark. */
+  --highlight: #e2766c;
+  /* Muted Sage: same role as --highlight (text/icons), for content that wants the
+     "technical, sophisticated" character instead of coral's "human, expressive" one. */
+  --sage-text: #a5bcb6;
 }
 
-html, body {
+.light {
+  --paper: #f5f5f3;
+  --surface: #ffffff;
+  --ink: #0f0f0f;
+  --ink-muted: #5c5c58;
+  --line: rgba(15, 15, 15, 0.12);
+  /* Electric Yellow reads acidic on a light surface, so light mode's block accent
+     switches to the brand's deep coral instead (see design-system §3.3's "Expressive"
+     combination). Same role as dark mode's yellow: solid blocks/buttons only. */
+  --accent: #93291a;
+  --accent-ink: #ffffff;
+  --highlight: #93291a;
+  --sage-text: #305349;
+}
+
+html,
+body {
   height: 100%;
 }
+
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
 }
+
 main {
   flex: 1 0 auto;
 }
 
-html:focus-within { scroll-behavior: smooth }
-body { @apply bg-white text-gray-900 antialiased }
-a { @apply underline-offset-2 decoration-transparent hover:decoration-current }
-.container { @apply max-w-6xl mx-auto px-4 sm:px-6 }
-.prose p { @apply leading-7 }
-.prose h2 { @apply text-2xl font-semibold mt-8 mb-3 }
-.prose h3 { @apply text-xl font-semibold mt-6 mb-2 }
-.prose ul { @apply list-disc ml-6 }
-.prose ol { @apply list-decimal ml-6 }
-button:focus-visible, a:focus-visible { @apply outline-none ring-2 ring-brand-400 rounded }
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+a {
+  @apply underline-offset-2 decoration-transparent hover:decoration-current;
+}
+
+.container {
+  @apply max-w-container mx-auto px-6 lg:px-8;
+}
+
+.prose {
+  color: var(--ink);
+}
+.prose p {
+  @apply leading-relaxed;
+  color: var(--ink-muted);
+}
+.prose h1 {
+  @apply font-display text-3xl font-bold mb-4;
+}
+.prose h2 {
+  @apply font-display text-2xl font-bold mt-10 mb-3;
+}
+.prose h3 {
+  @apply text-xl font-semibold mt-6 mb-2;
+}
+.prose ul {
+  @apply list-disc ml-6;
+  color: var(--ink-muted);
+}
+.prose ol {
+  @apply list-decimal ml-6;
+  color: var(--ink-muted);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-2 ring-highlight ring-offset-2;
+  --tw-ring-offset-color: var(--paper);
+}
+
+.font-mono-label {
+  @apply font-mono uppercase tracking-widest text-[11px];
+}
