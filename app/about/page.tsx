@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import Reveal from '@/components/Reveal'
+import ArrowLink from '@/components/ArrowLink'
 import { User } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata = {
@@ -84,9 +84,9 @@ export default function AboutPage() {
           ))}
         </div>
         <div className="mt-10">
-          <Link href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
-            Want to know more? Come talk to us. &rarr;
-          </Link>
+          <ArrowLink href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
+            Want to know more? Come talk to us.
+          </ArrowLink>
         </div>
       </section>
     </div>

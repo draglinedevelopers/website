@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Hero from '@/components/Hero'
 import Reveal from '@/components/Reveal'
+import ArrowLink from '@/components/ArrowLink'
 import { serviceAccent, accentClass } from '@/lib/accents'
 import {
   AppWindow,
@@ -103,7 +104,7 @@ export default function Page() {
                   <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
                   <p className="mt-2 text-sm text-ink-muted">{desc}</p>
                   <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium text-ink-muted ${a.hoverText}`}>
-                    See more <ArrowUpRight size={14} />
+                    See more <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </Link>
               </Reveal>
@@ -134,7 +135,7 @@ export default function Page() {
                     in one system.
                   </p>
                   <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
-                    View Project <ArrowUpRight size={14} />
+                    View Project <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </div>
                 <div className="relative aspect-[4/3] md:aspect-auto">
@@ -158,9 +159,9 @@ export default function Page() {
             </Link>
           </Reveal>
           <div className="mt-6">
-            <Link href="/work" className="text-sm font-medium text-ink hover:text-highlight">
-              See all work &rarr;
-            </Link>
+            <ArrowLink href="/work" className="text-sm font-medium text-ink hover:text-highlight">
+              See all work
+            </ArrowLink>
           </div>
         </div>
       </section>
@@ -189,7 +190,7 @@ export default function Page() {
           </h2>
           <Link
             href="/contact"
-            className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-dragline-black text-highlight px-6 py-3 text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-dragline-black text-highlight px-6 py-3 text-sm font-semibold hover:opacity-90 transition-[opacity,transform] duration-150 ease-out-strong active:scale-[0.97]"
           >
             Start a Conversation
           </Link>

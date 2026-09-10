@@ -106,7 +106,7 @@ export default function ContactForm() {
       <input type="text" name="company_website" className="hidden" tabIndex={-1} autoComplete="off" />
 
       {status === 'error' && (
-        <p className="text-sm text-highlight" role="alert">{error}</p>
+        <p className="enter-fade text-sm text-highlight" role="alert">{error}</p>
       )}
 
       <button

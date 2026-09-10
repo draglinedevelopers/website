@@ -17,6 +17,31 @@ const nav = [
   { href: '/contact', label: 'Contact' },
 ]
 
+// Crossfade + rotate between Sun/Moon instead of an instant unmount/remount swap.
+// Both icons stay mounted and stacked; only opacity/transform change on theme toggle.
+function ThemeIcon({ isDark, size }: { isDark: boolean; size: number }) {
+  return (
+    <span className="relative inline-block" style={{ width: size, height: size }}>
+      <Sun
+        size={size}
+        weight="regular"
+        className={cn(
+          'absolute inset-0 transition-[opacity,transform] duration-200 ease-out-strong',
+          isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
+        )}
+      />
+      <Moon
+        size={size}
+        weight="regular"
+        className={cn(
+          'absolute inset-0 transition-[opacity,transform] duration-200 ease-out-strong',
+          isDark ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
+        )}
+      />
+    </span>
+  )
+}
+
 export default function Header() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -76,7 +101,7 @@ export default function Header() {
               className="hidden sm:inline-flex items-center justify-center h-9 w-9 rounded-md border border-line text-ink-muted hover:text-ink hover:border-ink transition-colors"
               aria-label="Toggle color theme"
             >
-              {resolvedTheme === 'dark' ? <Sun size={16} weight="regular" /> : <Moon size={16} weight="regular" />}
+              <ThemeIcon isDark={resolvedTheme === 'dark'} size={16} />
             </button>
           )}
           <Button href="/contact" className="hidden sm:inline-flex">
@@ -101,7 +126,7 @@ export default function Header() {
         aria-hidden="true"
         onClick={() => setOpen(false)}
         className={cn(
-          'md:hidden fixed inset-0 z-40 bg-pure-black/60 transition-opacity duration-300',
+          'md:hidden fixed inset-0 z-40 bg-pure-black/60 transition-opacity duration-300 ease-out-strong',
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         )}
       />
@@ -148,7 +173,7 @@ export default function Header() {
               onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
               className="mt-3 inline-flex items-center gap-2 text-sm text-ink-muted"
             >
-              {resolvedTheme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              <ThemeIcon isDark={resolvedTheme === 'dark'} size={16} />
               {resolvedTheme === 'dark' ? 'Light mode' : 'Dark mode'}
             </button>
           )}

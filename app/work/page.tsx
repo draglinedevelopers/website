@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import Reveal from '@/components/Reveal'
+import ArrowLink from '@/components/ArrowLink'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata = {
@@ -40,7 +41,7 @@ export default function WorkPage() {
                 <p className="mt-2 text-sm text-ink-muted">{c.context}</p>
                 <p className="mt-4 text-ink-muted max-w-md">{c.problem}</p>
                 <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
-                  View Project <ArrowUpRight size={14} />
+                  View Project <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </div>
               <div className="relative aspect-[4/3] md:aspect-auto">
@@ -67,9 +68,9 @@ export default function WorkPage() {
       </div>
 
       <div className="container pb-16 md:pb-20">
-        <Link href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
-          Working on something? Let&apos;s talk. &rarr;
-        </Link>
+        <ArrowLink href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
+          Working on something? Let&apos;s talk.
+        </ArrowLink>
       </div>
     </div>
   )

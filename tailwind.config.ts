@@ -2,6 +2,11 @@ import type { Config } from 'tailwindcss'
 
 export default {
   darkMode: 'class',
+  future: {
+    // Gates every `hover:` utility behind @media (hover: hover) and (pointer: fine),
+    // so touch taps stop triggering hover states site-wide (animate skill checklist).
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     './app/**/*.{ts,tsx,mdx}',
     './components/**/*.{ts,tsx,mdx}',

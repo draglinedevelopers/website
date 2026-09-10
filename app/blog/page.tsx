@@ -4,6 +4,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 import readingTime from 'reading-time'
 import PageHero from '@/components/PageHero'
+import Reveal from '@/components/Reveal'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
 type Post = {
@@ -38,19 +39,23 @@ export default function BlogPage() {
     <div>
       <PageHero eyebrow="Blog" title="Insights & updates" />
       <div className="container py-16 md:py-20 grid md:grid-cols-2 gap-5">
-        {posts.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/blog/${p.slug}`}
-            className="group rounded-lg border border-line p-8 hover:border-ink transition-colors"
-          >
-            <div className="font-mono-label text-ink-muted">{p.date} · {p.readingTime}</div>
-            <div className="mt-3 flex items-start justify-between gap-4">
-              <div className="font-semibold">{p.title}</div>
-              <ArrowUpRight size={18} className="shrink-0 text-ink-muted group-hover:text-ink" />
-            </div>
-            <p className="mt-2 text-sm text-ink-muted">{p.excerpt}</p>
-          </Link>
+        {posts.map((p, i) => (
+          <Reveal key={p.slug} delay={i * 60}>
+            <Link
+              href={`/blog/${p.slug}`}
+              className="group block rounded-lg border border-line p-8 transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+            >
+              <div className="font-mono-label text-ink-muted">{p.date} · {p.readingTime}</div>
+              <div className="mt-3 flex items-start justify-between gap-4">
+                <div className="font-semibold">{p.title}</div>
+                <ArrowUpRight
+                  size={18}
+                  className="shrink-0 text-ink-muted transition-[color,transform] duration-150 ease-out-strong group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </div>
+              <p className="mt-2 text-sm text-ink-muted">{p.excerpt}</p>
+            </Link>
+          </Reveal>
         ))}
       </div>
     </div>

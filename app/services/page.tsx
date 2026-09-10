@@ -142,7 +142,7 @@ export default function ServicesPage() {
                   <div className="mt-6">
                     <Link
                       href="/contact"
-                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-md border px-5 py-2.5 text-sm font-semibold ${a.border} ${a.text} hover:opacity-80 transition-opacity`}
+                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-md border px-5 py-2.5 text-sm font-semibold ${a.border} ${a.text} hover:opacity-80 transition-[opacity,transform] duration-150 ease-out-strong active:scale-[0.97]`}
                     >
                       {s.cta}
                     </Link>
