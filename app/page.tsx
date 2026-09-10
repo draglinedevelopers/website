@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Hero from '@/components/Hero'
+import Reveal from '@/components/Reveal'
 import { serviceAccent, accentClass } from '@/lib/accents'
 import {
   AppWindow,
@@ -93,18 +94,19 @@ export default function Page() {
             const a = accentClass[serviceAccent[id]]
             const isLast = i === services.length - 1
             return (
-              <Link
-                key={id}
-                href={`/services#${id}`}
-                className={`group rounded-lg border border-line p-8 hover:border-ink transition-colors ${isLast ? 'sm:col-span-2' : ''}`}
-              >
-                <Icon size={24} weight="regular" className={a.text} />
-                <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
-                <p className="mt-2 text-sm text-ink-muted">{desc}</p>
-                <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium text-ink-muted ${a.hoverText}`}>
-                  See more <ArrowUpRight size={14} />
-                </span>
-              </Link>
+              <Reveal key={id} delay={i * 60} className={isLast ? 'sm:col-span-2' : ''}>
+                <Link
+                  href={`/services#${id}`}
+                  className="group block rounded-lg border border-line p-8 transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+                >
+                  <Icon size={24} weight="regular" className={a.text} />
+                  <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm text-ink-muted">{desc}</p>
+                  <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium text-ink-muted ${a.hoverText}`}>
+                    See more <ArrowUpRight size={14} />
+                  </span>
+                </Link>
+              </Reveal>
             )
           })}
         </div>
@@ -116,43 +118,45 @@ export default function Page() {
           <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight max-w-xl">
             What we&apos;ve built
           </h2>
-          <Link
-            href="/work"
-            className="group mt-8 block rounded-lg border border-line overflow-hidden hover:border-ink transition-colors"
-          >
-            <div className="grid md:grid-cols-2">
-              <div className="p-8 md:p-10 flex flex-col justify-center">
-                <span className="font-mono-label text-ink-muted">Automation &amp; Business Systems</span>
-                <h3 className="mt-3 font-display text-2xl font-semibold">
-                  Operations System for a Food Business
-                </h3>
-                <p className="mt-3 text-ink-muted max-w-md">
-                  Real-time inventory, multi-channel sales, and automated payment reconciliation
-                  in one system.
-                </p>
-                <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
-                  View Project <ArrowUpRight size={14} />
-                </span>
+          <Reveal>
+            <Link
+              href="/work"
+              className="group mt-8 block rounded-lg border border-line overflow-hidden transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+            >
+              <div className="grid md:grid-cols-2">
+                <div className="p-8 md:p-10 flex flex-col justify-center">
+                  <span className="font-mono-label text-ink-muted">Automation &amp; Business Systems</span>
+                  <h3 className="mt-3 font-display text-2xl font-semibold">
+                    Operations System for a Food Business
+                  </h3>
+                  <p className="mt-3 text-ink-muted max-w-md">
+                    Real-time inventory, multi-channel sales, and automated payment reconciliation
+                    in one system.
+                  </p>
+                  <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
+                    View Project <ArrowUpRight size={14} />
+                  </span>
+                </div>
+                <div className="relative aspect-[4/3] md:aspect-auto">
+                  <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+                    <rect width="400" height="300" className="fill-paper" />
+                    <g className="stroke-line" strokeWidth="1">
+                      <line x1="0" y1="75" x2="400" y2="75" />
+                      <line x1="0" y1="150" x2="400" y2="150" />
+                      <line x1="0" y1="225" x2="400" y2="225" />
+                      <line x1="100" y1="0" x2="100" y2="300" />
+                      <line x1="200" y1="0" x2="200" y2="300" />
+                      <line x1="300" y1="0" x2="300" y2="300" />
+                    </g>
+                    <rect x="40" y="180" width="40" height="70" className="fill-accent" />
+                    <rect x="120" y="120" width="40" height="130" className="fill-sage" />
+                    <rect x="200" y="150" width="40" height="100" className="fill-ink-muted" />
+                    <rect x="280" y="90" width="40" height="160" className="fill-highlight" />
+                  </svg>
+                </div>
               </div>
-              <div className="relative aspect-[4/3] md:aspect-auto">
-                <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-                  <rect width="400" height="300" className="fill-paper" />
-                  <g className="stroke-line" strokeWidth="1">
-                    <line x1="0" y1="75" x2="400" y2="75" />
-                    <line x1="0" y1="150" x2="400" y2="150" />
-                    <line x1="0" y1="225" x2="400" y2="225" />
-                    <line x1="100" y1="0" x2="100" y2="300" />
-                    <line x1="200" y1="0" x2="200" y2="300" />
-                    <line x1="300" y1="0" x2="300" y2="300" />
-                  </g>
-                  <rect x="40" y="180" width="40" height="70" className="fill-accent" />
-                  <rect x="120" y="120" width="40" height="130" className="fill-sage" />
-                  <rect x="200" y="150" width="40" height="100" className="fill-ink-muted" />
-                  <rect x="280" y="90" width="40" height="160" className="fill-highlight" />
-                </svg>
-              </div>
-            </div>
-          </Link>
+            </Link>
+          </Reveal>
           <div className="mt-6">
             <Link href="/work" className="text-sm font-medium text-ink hover:text-highlight">
               See all work &rarr;
@@ -167,12 +171,12 @@ export default function Page() {
           Why Dragline
         </h2>
         <div className="mt-10 grid sm:grid-cols-3 gap-8">
-          {proofPoints.map(({ title, desc, icon: Icon }) => (
-            <div key={title}>
+          {proofPoints.map(({ title, desc, icon: Icon }, i) => (
+            <Reveal key={title} delay={i * 60}>
               <Icon size={24} weight="regular" />
               <h3 className="mt-4 font-semibold">{title}</h3>
               <p className="mt-2 text-sm text-ink-muted">{desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>

@@ -110,7 +110,7 @@ export default function Header() {
       <div
         id="mobile-nav"
         className={cn(
-          'md:hidden fixed inset-y-0 right-0 z-50 w-[82vw] max-w-xs border-l border-line bg-paper transition-transform duration-300 ease-out',
+          'md:hidden fixed inset-y-0 right-0 z-50 w-[82vw] max-w-xs border-l border-line bg-paper transition-transform duration-300 ease-drawer',
           open ? 'translate-x-0' : 'translate-x-full'
         )}
         role="dialog"

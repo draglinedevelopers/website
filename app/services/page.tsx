@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { Button } from '@/components/Button'
+import Reveal from '@/components/Reveal'
 import { serviceAccent, accentClass } from '@/lib/accents'
 
 export const metadata = {
@@ -114,7 +115,7 @@ export default function ServicesPage() {
         {services.map((s) => {
           const a = accentClass[serviceAccent[s.id]]
           return (
-            <section id={s.id} key={s.id} className="rounded-lg border border-line p-8 md:p-10">
+            <Reveal id={s.id} key={s.id} className="rounded-lg border border-line p-8 md:p-10">
               <div className="flex items-start gap-4">
                 <span className={`font-mono text-2xl shrink-0 ${a.text}`}>{s.number}</span>
                 <div>
@@ -148,7 +149,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
               </div>
-            </section>
+            </Reveal>
           )
         })}
       </div>

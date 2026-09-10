@@ -37,7 +37,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-lg border border-line p-8 flex items-start gap-4">
+      <div className="enter-pop rounded-lg border border-line p-8 flex items-start gap-4">
         <CheckCircle size={24} weight="regular" className="text-highlight shrink-0 mt-0.5" />
         <p className="text-lg">
           Thanks, we&apos;ve received your message and will respond within one business day.
@@ -112,7 +112,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex items-center justify-center rounded-md bg-accent text-accent-ink px-5 py-2.5 text-sm font-semibold hover:brightness-95 active:scale-[0.98] transition-transform disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-md bg-accent text-accent-ink px-5 py-2.5 text-sm font-semibold hover:brightness-95 active:scale-[0.97] transition-transform duration-150 ease-out-strong disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </button>

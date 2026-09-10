@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
+import Reveal from '@/components/Reveal'
 import { User } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata = {
@@ -57,8 +58,8 @@ export default function AboutPage() {
         <div className="container py-16 md:py-20">
           <h2 className="font-display text-2xl font-bold tracking-tight">The Team</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {team.map((t) => (
-              <div key={t.role} className="rounded-lg border border-line p-6 flex items-start gap-4">
+            {team.map((t, i) => (
+              <Reveal key={t.role} delay={i * 60} className="rounded-lg border border-line p-6 flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line text-ink-muted">
                   <User size={22} weight="regular" />
                 </div>
@@ -66,7 +67,7 @@ export default function AboutPage() {
                   <h3 className="font-semibold">{t.role}</h3>
                   <p className="mt-1 text-sm text-ink-muted">{t.dept}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -75,11 +76,11 @@ export default function AboutPage() {
       <section className="container py-16 md:py-20">
         <h2 className="font-display text-2xl font-bold tracking-tight">What We Believe</h2>
         <div className="mt-8 grid gap-8 md:grid-cols-3">
-          {principles.map((p) => (
-            <div key={p.title}>
+          {principles.map((p, i) => (
+            <Reveal key={p.title} delay={i * 60}>
               <h3 className="font-semibold">{p.title}</h3>
               <p className="mt-2 text-sm text-ink-muted">{p.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
         <div className="mt-10">

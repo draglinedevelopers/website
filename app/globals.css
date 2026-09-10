@@ -108,3 +108,27 @@ textarea:focus-visible {
 .font-mono-label {
   @apply font-mono uppercase tracking-widest text-[11px];
 }
+
+/* Entry transition for elements that mount in place of something else (e.g. the contact
+   form's inline success state). Uses @starting-style instead of a useEffect mount flag.
+   Scale starts at 0.96, never 0 (see emilkowalski/skills design-eng: real UI elements
+   don't pop from nothing). Reduced motion keeps the opacity fade, drops the scale. */
+.enter-pop {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter-pop {
+    transform: scale(1);
+    transition: opacity 300ms ease-out, transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+
+    @starting-style {
+      transform: scale(0.96);
+    }
+  }
+}

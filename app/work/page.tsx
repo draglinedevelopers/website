@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import PageHero from '@/components/PageHero'
+import Reveal from '@/components/Reveal'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 
 export const metadata = {
@@ -26,11 +27,11 @@ export default function WorkPage() {
       </PageHero>
 
       <div className="container py-16 md:py-20 grid gap-5">
-        {cases.map((c) => (
+        {cases.map((c, i) => (
+          <Reveal key={c.slug} delay={i * 60}>
           <Link
-            key={c.slug}
             href={`/work/${c.slug}`}
-            className="group rounded-lg border border-line overflow-hidden hover:border-ink transition-colors"
+            className="group block rounded-lg border border-line overflow-hidden transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
           >
             <div className="grid md:grid-cols-2">
               <div className="p-8 md:p-10">
@@ -61,6 +62,7 @@ export default function WorkPage() {
               </div>
             </div>
           </Link>
+          </Reveal>
         ))}
       </div>
 
