@@ -5,7 +5,7 @@ import { serviceAccent, accentClass } from '@/lib/accents'
 
 export const metadata = {
   title: 'Services',
-  description: 'Four practice areas, one team: Digital Product Development, Business Automation & AI, Design, and Technology Consulting.',
+  description: 'Five practice areas, one team: Digital Product Development, APIs & Integrations, Business Automation & AI, Design, and Technology Consulting.',
 }
 
 const services = [
@@ -25,8 +25,23 @@ const services = [
     cta: 'Talk to us about Digital Products',
   },
   {
-    id: 'automation-ai',
+    id: 'api-integrations',
     number: '02',
+    title: 'APIs & Integrations',
+    positioning: 'Your business runs on systems that need to work together. We build the connections that make that possible.',
+    deliverables: [
+      'Secure REST and GraphQL API design and development',
+      'Webhook pipelines and third-party integrations',
+      'Rate limiting, authentication, and API versioning',
+      'Payment gateway and platform integrations',
+      'API documentation and developer support',
+    ],
+    whoFor: 'Businesses whose products or operations depend on multiple systems working together reliably, and teams that need a clean, well-documented API their partners can build on.',
+    cta: 'Talk to us about APIs & Integrations',
+  },
+  {
+    id: 'automation-ai',
+    number: '03',
     title: 'Business Automation & AI',
     positioning: 'Manual processes are a tax on your business. We replace them with systems that work while you sleep.',
     deliverables: [
@@ -42,7 +57,7 @@ const services = [
   },
   {
     id: 'design',
-    number: '03',
+    number: '04',
     title: 'Design',
     positioning: 'Before your product is built, it needs to be understood. Design is how we make complex things feel simple.',
     deliverables: [
@@ -57,7 +72,7 @@ const services = [
   },
   {
     id: 'technology-consulting',
-    number: '04',
+    number: '05',
     title: 'Technology Consulting',
     positioning: 'Not every problem needs code. Sometimes it needs clarity first.',
     deliverables: [
@@ -91,7 +106,7 @@ export default function ServicesPage() {
   return (
     <div>
       <PageHero eyebrow="Services" title="What We Build">
-        Four practice areas. One team. Everything your business needs to operate, grow, and
+        Five practice areas. One team. Everything your business needs to operate, grow, and
         compete in a digital world.
       </PageHero>
 

@@ -9,6 +9,7 @@ export const serviceAccent: Record<string, Accent> = {
   'automation-ai': 'sage',
   design: 'coral',
   'technology-consulting': 'sage',
+  'api-integrations': 'sage',
 }
 
 export const accentClass: Record<Accent, { text: string; hoverText: string; bg: string; border: string }> = {

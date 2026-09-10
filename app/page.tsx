@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import { serviceAccent, accentClass } from '@/lib/accents'
 import {
   AppWindow,
+  Plugs,
   Robot,
   PenNib,
   Compass,
@@ -18,6 +19,12 @@ const services = [
     title: 'Digital Products',
     desc: 'Web apps, mobile apps, and customer platforms built to perform.',
     icon: AppWindow,
+  },
+  {
+    id: 'api-integrations',
+    title: 'APIs & Integrations',
+    desc: 'Secure APIs and reliable integrations that let your systems work together.',
+    icon: Plugs,
   },
   {
     id: 'automation-ai',
@@ -82,13 +89,14 @@ export default function Page() {
           What we do
         </h2>
         <div className="mt-8 grid sm:grid-cols-2 gap-5">
-          {services.map(({ id, title, desc, icon: Icon }) => {
+          {services.map(({ id, title, desc, icon: Icon }, i) => {
             const a = accentClass[serviceAccent[id]]
+            const isLast = i === services.length - 1
             return (
               <Link
                 key={id}
                 href={`/services#${id}`}
-                className="group rounded-lg border border-line p-8 hover:border-ink transition-colors"
+                className={`group rounded-lg border border-line p-8 hover:border-ink transition-colors ${isLast ? 'sm:col-span-2' : ''}`}
               >
                 <Icon size={24} weight="regular" className={a.text} />
                 <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
