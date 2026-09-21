@@ -2,6 +2,7 @@ import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { Button } from '@/components/Button'
 import Reveal from '@/components/Reveal'
+import PracticeAreasDiagram from '@/components/PracticeAreasDiagram'
 import { serviceAccent, accentClass } from '@/lib/accents'
 
 export const metadata = {
@@ -110,6 +111,8 @@ export default function ServicesPage() {
         Five practice areas. One team. Everything your business needs to operate, grow, and
         compete in a digital world.
       </PageHero>
+
+      <PracticeAreasDiagram />
 
       <div className="container py-16 md:py-20 space-y-6">
         {services.map((s) => {

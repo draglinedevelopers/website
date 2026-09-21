@@ -4,6 +4,7 @@ import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ThemeProvider from '@/components/ThemeProvider'
+import SmoothScroll from '@/components/SmoothScroll'
 import { site } from '@/lib/metadata'
 
 const display = Space_Grotesk({
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider>
+          <SmoothScroll />
           <Header />
           <main>{children}</main>
           <Footer />
