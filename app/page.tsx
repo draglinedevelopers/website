@@ -98,9 +98,11 @@ export default function Page() {
               <Reveal key={id} delay={i * 60} className={isLast ? 'sm:col-span-2' : ''}>
                 <Link
                   href={`/services#${id}`}
-                  className="group block rounded-lg border border-line p-8 transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+                  className="group block h-full rounded-lg border border-line bg-surface p-8 shadow-sm transition-[border-color,transform,box-shadow] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5 hover:shadow-md"
                 >
-                  <Icon size={24} weight="regular" className={a.text} />
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line">
+                    <Icon size={22} weight="regular" className={a.text} />
+                  </div>
                   <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
                   <p className="mt-2 text-sm text-ink-muted">{desc}</p>
                   <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium text-ink-muted ${a.hoverText}`}>
