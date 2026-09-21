@@ -98,6 +98,7 @@ export default function ContactForm() {
         >
           <option value="">Select an option</option>
           <option value="LinkedIn">LinkedIn</option>
+          <option value="Instagram">Instagram</option>
           <option value="Referral">Referral</option>
           <option value="Search">Search</option>
           <option value="Other">Other</option>
