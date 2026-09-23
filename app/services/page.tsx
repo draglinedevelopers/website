@@ -1,8 +1,6 @@
-import Link from 'next/link'
 import PageHero from '@/components/PageHero'
 import { Button } from '@/components/Button'
 import Reveal from '@/components/Reveal'
-import PracticeAreasDiagram from '@/components/PracticeAreasDiagram'
 import { serviceAccent, accentClass } from '@/lib/accents'
 
 export const metadata = {
@@ -24,7 +22,6 @@ const services = [
       'MVP development for startups',
     ],
     whoFor: 'Startups and growing businesses that need a product built properly from the start, not patched together and retrofitted later.',
-    cta: 'Talk to us about Digital Products',
   },
   {
     id: 'api-integrations',
@@ -39,7 +36,6 @@ const services = [
       'API documentation and developer support',
     ],
     whoFor: 'Businesses whose products or operations depend on multiple systems working together reliably, and teams that need a clean, well-documented API their partners can build on.',
-    cta: 'Talk to us about APIs & Integrations',
   },
   {
     id: 'automation-ai',
@@ -55,7 +51,6 @@ const services = [
       'Inventory and operations management systems',
     ],
     whoFor: 'Businesses growing fast but being held back by repetitive, manual operations, and founders who want technology to work for them, not the other way around.',
-    cta: 'Talk to us about Automation & AI',
   },
   {
     id: 'design',
@@ -70,7 +65,6 @@ const services = [
       'Brand identity for digital products',
     ],
     whoFor: 'Businesses building something new or improving something that currently confuses or frustrates their customers.',
-    cta: 'Talk to us about Design',
   },
   {
     id: 'technology-consulting',
@@ -85,7 +79,6 @@ const services = [
       'Team structure and hiring advice for technology roles',
     ],
     whoFor: 'Founders and leadership teams who need to understand their technology landscape before committing to a direction, and who want an honest, independent view.',
-    cta: 'Talk to us about Consulting',
   },
 ]
 
@@ -112,45 +105,34 @@ export default function ServicesPage() {
         compete in a digital world.
       </PageHero>
 
-      <PracticeAreasDiagram />
-
-      <div className="container py-16 md:py-20 space-y-6">
-        {services.map((s) => {
+      <div className="container border-t border-line divide-y divide-line">
+        {services.map((s, i) => {
           const a = accentClass[serviceAccent[s.id]]
           return (
-            <Reveal id={s.id} key={s.id} className="rounded-lg border border-line p-8 md:p-10">
-              <div className="flex items-start gap-4">
-                <span className={`font-mono text-2xl shrink-0 ${a.text}`}>{s.number}</span>
-                <div>
-                  <h2 className="font-display text-xl font-semibold">{s.title}</h2>
-                  <p className="mt-3 text-lg font-medium">{s.positioning}</p>
-                </div>
+            <Reveal
+              id={s.id}
+              key={s.id}
+              delay={i * 60}
+              className="grid md:grid-cols-[56px_1fr_1fr] gap-4 md:gap-10 py-10 md:py-12"
+            >
+              <span className={`font-mono text-sm ${a.text}`}>{s.number}</span>
+
+              <div>
+                <h2 className="font-display text-2xl font-semibold">{s.title}</h2>
+                <p className="mt-3 text-ink-muted">{s.positioning}</p>
+                <p className="mt-6 text-sm text-ink-muted">
+                  <span className="font-mono-label text-ink-muted">Who it&apos;s for — </span>
+                  {s.whoFor}
+                </p>
               </div>
 
-              <div className="mt-6 grid md:grid-cols-2 gap-8 md:pl-11">
-                <div>
-                  <h3 className="font-mono-label text-ink-muted mb-3">Deliverables</h3>
-                  <ul className="space-y-2 text-ink-muted">
-                    {s.deliverables.map((d) => (
-                      <li key={d} className="flex gap-3">
-                        <span className={`mt-2 h-1 w-1 shrink-0 rounded-full ${a.bg}`} aria-hidden="true" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-mono-label text-ink-muted mb-3">Who it&apos;s for</h3>
-                  <p className="text-ink-muted">{s.whoFor}</p>
-                  <div className="mt-6">
-                    <Link
-                      href="/contact"
-                      className={`inline-flex items-center justify-center whitespace-nowrap rounded-md border px-5 py-2.5 text-sm font-semibold ${a.border} ${a.text} hover:opacity-80 transition-[opacity,transform] duration-150 ease-out-strong active:scale-[0.97]`}
-                    >
-                      {s.cta}
-                    </Link>
-                  </div>
-                </div>
+              <div>
+                <h3 className="font-mono-label text-ink-muted mb-3">Deliverables</h3>
+                <ul className="space-y-2 text-ink-muted">
+                  {s.deliverables.map((d) => (
+                    <li key={d}>{d}</li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           )
@@ -162,7 +144,7 @@ export default function ServicesPage() {
           <h2 className="font-display text-2xl font-bold tracking-tight">How we work with clients</h2>
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             {engagementModels.map((m) => (
-              <div key={m.title} className="rounded-lg border border-line p-6">
+              <div key={m.title} className="rounded-2xl bg-paper p-6">
                 <h3 className="font-semibold">{m.title}</h3>
                 <p className="mt-2 text-sm text-ink-muted">{m.desc}</p>
               </div>

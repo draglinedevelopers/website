@@ -59,8 +59,8 @@ export default function AboutPage() {
           <h2 className="font-display text-2xl font-bold tracking-tight">The Team</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
             {team.map((t, i) => (
-              <Reveal key={t.role} delay={i * 60} className="rounded-lg border border-line p-6 flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line text-ink-muted">
+              <Reveal key={t.role} delay={i * 60} className="rounded-2xl bg-paper p-6 flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-ink-muted">
                   <User size={22} weight="regular" />
                 </div>
                 <div>

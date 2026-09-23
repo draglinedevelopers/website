@@ -1,21 +1,36 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { z } from 'zod'
+
+const contactSchema = z.object({
+  name: z.string().trim().min(1).max(200),
+  email: z.string().trim().min(1).max(320).email(),
+  company: z.string().trim().min(1).max(200),
+  message: z.string().trim().min(1).max(5000),
+  howHeard: z.string().trim().max(200).optional().default(''),
+  company_website: z.string().trim().max(200).optional().default(''), // honeypot
+})
 
 export async function POST(request: Request) {
-  const body = await request.json()
-  const name = String(body.name ?? '').trim()
-  const email = String(body.email ?? '').trim()
-  const company = String(body.company ?? '').trim()
-  const message = String(body.message ?? '').trim()
-  const howHeard = String(body.howHeard ?? '').trim()
-  const honeypot = String(body.company_website ?? '').trim() // honeypot
+  let body: unknown
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ ok: false, error: 'Invalid request.' }, { status: 400 })
+  }
+
+  const parsed = contactSchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json(
+      { ok: false, error: 'Please check your details and try again — a required field is missing or invalid.' },
+      { status: 400 }
+    )
+  }
+
+  const { name, email, company, message, howHeard, company_website: honeypot } = parsed.data
 
   if (honeypot) {
     return NextResponse.json({ ok: true })
-  }
-
-  if (!name || !email || !company || !message) {
-    return NextResponse.json({ ok: false, error: 'Please fill in all required fields.' }, { status: 400 })
   }
 
   const resendApiKey = process.env.RESEND_API_KEY

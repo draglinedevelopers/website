@@ -43,7 +43,7 @@ export default function BlogPage() {
           <Reveal key={p.slug} delay={i * 60}>
             <Link
               href={`/blog/${p.slug}`}
-              className="group block rounded-lg border border-line p-8 transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+              className="group block rounded-2xl bg-surface p-8 transition-[transform,box-shadow] duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-lg"
             >
               <div className="font-mono-label text-ink-muted">{p.date} · {p.readingTime}</div>
               <div className="mt-3 flex items-start justify-between gap-4">

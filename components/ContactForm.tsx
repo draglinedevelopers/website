@@ -37,7 +37,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="enter-pop rounded-lg border border-line p-8 flex items-start gap-4">
+      <div className="enter-pop rounded-2xl bg-surface p-8 flex items-start gap-4" role="status">
         <CheckCircle size={24} weight="regular" className="text-highlight shrink-0 mt-0.5" />
         <p className="text-lg">
           Thanks, we&apos;ve received your message and will respond within one business day.
@@ -46,15 +46,20 @@ export default function ContactForm() {
     )
   }
 
+  const fieldClass =
+    'mt-2 w-full border-0 border-b border-line bg-transparent px-0 py-2.5 text-ink placeholder:text-ink-muted transition-colors focus:outline-none focus:border-ink focus-visible:ring-0 focus-visible:ring-offset-0'
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form onSubmit={handleSubmit} className="space-y-7">
       <div>
         <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
         <input
           required
           id="name"
           name="name"
-          className="mt-2 w-full rounded-md border border-line bg-surface px-3 py-2.5 text-ink placeholder:text-ink-muted"
+          autoComplete="name"
+          placeholder="Type your name"
+          className={fieldClass}
         />
       </div>
       <div>
@@ -64,7 +69,9 @@ export default function ContactForm() {
           type="email"
           id="email"
           name="email"
-          className="mt-2 w-full rounded-md border border-line bg-surface px-3 py-2.5 text-ink placeholder:text-ink-muted"
+          autoComplete="email"
+          placeholder="Type your email"
+          className={fieldClass}
         />
       </div>
       <div>
@@ -73,7 +80,9 @@ export default function ContactForm() {
           required
           id="company"
           name="company"
-          className="mt-2 w-full rounded-md border border-line bg-surface px-3 py-2.5 text-ink placeholder:text-ink-muted"
+          autoComplete="organization"
+          placeholder="Type your company name"
+          className={fieldClass}
         />
       </div>
       <div>
@@ -82,20 +91,16 @@ export default function ContactForm() {
           required
           id="message"
           name="message"
-          rows={5}
-          className="mt-2 w-full rounded-md border border-line bg-surface px-3 py-2.5 text-ink placeholder:text-ink-muted"
+          rows={4}
+          placeholder="Tell us about your project"
+          className={fieldClass}
         />
       </div>
       <div>
         <label htmlFor="howHeard" className="block text-sm font-medium">
           How did you hear about Dragline? <span className="text-ink-muted font-normal">(optional)</span>
         </label>
-        <select
-          id="howHeard"
-          name="howHeard"
-          defaultValue=""
-          className="mt-2 w-full rounded-md border border-line bg-surface px-3 py-2.5 text-ink"
-        >
+        <select id="howHeard" name="howHeard" defaultValue="" className={fieldClass}>
           <option value="">Select an option</option>
           <option value="LinkedIn">LinkedIn</option>
           <option value="Instagram">Instagram</option>
@@ -104,16 +109,23 @@ export default function ContactForm() {
           <option value="Other">Other</option>
         </select>
       </div>
-      <input type="text" name="company_website" className="hidden" tabIndex={-1} autoComplete="off" />
+      <input
+        type="text"
+        name="company_website"
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
 
       {status === 'error' && (
-        <p className="enter-fade text-sm text-highlight" role="alert">{error}</p>
+        <p className="enter-fade text-sm text-highlight" role="alert" aria-live="assertive">{error}</p>
       )}
 
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex items-center justify-center rounded-md bg-accent text-accent-ink px-5 py-2.5 text-sm font-semibold hover:brightness-95 active:scale-[0.97] transition-transform duration-150 ease-out-strong disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-full bg-accent text-accent-ink px-6 py-2.5 text-sm font-semibold hover:brightness-95 active:scale-[0.97] transition-transform duration-150 ease-out-strong disabled:opacity-60"
       >
         {status === 'submitting' ? 'Sending…' : 'Send Message'}
       </button>

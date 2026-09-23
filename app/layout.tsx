@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google'
 import Header from '@/components/Header'
+import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
 import ThemeProvider from '@/components/ThemeProvider'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -61,7 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <SmoothScroll />
           <Header />
-          <main>{children}</main>
+          <main className="pt-24">{children}</main>
+          <CTASection />
           <Footer />
         </ThemeProvider>
       </body>

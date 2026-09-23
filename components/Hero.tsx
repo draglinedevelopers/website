@@ -19,7 +19,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-line">
+        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
           <Image
             src="https://images.unsplash.com/photo-1622737133809-d95047b9e673?auto=format&fit=crop&w=1600&q=80"
             alt="Minimal abstract composition of floating geometric cubes with glowing yellow spheres"

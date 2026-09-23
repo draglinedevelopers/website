@@ -2,7 +2,9 @@ import Link from 'next/link'
 import Hero from '@/components/Hero'
 import Reveal from '@/components/Reveal'
 import ArrowLink from '@/components/ArrowLink'
+import WorkGraphic from '@/components/WorkGraphic'
 import { serviceAccent, accentClass } from '@/lib/accents'
+import { cases } from '@/lib/work'
 import {
   AppWindow,
   Plugs,
@@ -98,9 +100,9 @@ export default function Page() {
               <Reveal key={id} delay={i * 60} className={isLast ? 'sm:col-span-2' : ''}>
                 <Link
                   href={`/services#${id}`}
-                  className="group block h-full rounded-lg border border-line bg-surface p-8 shadow-sm transition-[border-color,transform,box-shadow] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5 hover:shadow-md"
+                  className="group block h-full rounded-2xl bg-surface p-8 md:p-9 transition-[transform,box-shadow] duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-lg"
                 >
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line">
+                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-paper">
                     <Icon size={22} weight="regular" className={a.text} />
                   </div>
                   <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
@@ -123,39 +125,20 @@ export default function Page() {
           </h2>
           <Reveal>
             <Link
-              href="/work"
-              className="group mt-8 block rounded-lg border border-line overflow-hidden transition-[border-color,transform] duration-200 ease-out-strong hover:border-ink hover:-translate-y-0.5"
+              href={`/work/${cases[0].slug}`}
+              className="group mt-8 block rounded-2xl overflow-hidden bg-paper transition-[transform,box-shadow] duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-lg"
             >
               <div className="grid md:grid-cols-2">
                 <div className="p-8 md:p-10 flex flex-col justify-center">
-                  <span className="font-mono-label text-ink-muted">Automation &amp; Business Systems</span>
-                  <h3 className="mt-3 font-display text-2xl font-semibold">
-                    Operations System for a Food Business
-                  </h3>
-                  <p className="mt-3 text-ink-muted max-w-md">
-                    Real-time inventory, multi-channel sales, and automated payment reconciliation
-                    in one system.
-                  </p>
+                  <span className="font-mono-label text-ink-muted">{cases[0].category}</span>
+                  <h3 className="mt-3 font-display text-2xl font-semibold">{cases[0].title}</h3>
+                  <p className="mt-3 text-ink-muted max-w-md">{cases[0].summary}</p>
                   <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
                     View Project <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </div>
                 <div className="relative aspect-[4/3] md:aspect-auto">
-                  <svg viewBox="0 0 400 300" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-                    <rect width="400" height="300" className="fill-paper" />
-                    <g className="stroke-line" strokeWidth="1">
-                      <line x1="0" y1="75" x2="400" y2="75" />
-                      <line x1="0" y1="150" x2="400" y2="150" />
-                      <line x1="0" y1="225" x2="400" y2="225" />
-                      <line x1="100" y1="0" x2="100" y2="300" />
-                      <line x1="200" y1="0" x2="200" y2="300" />
-                      <line x1="300" y1="0" x2="300" y2="300" />
-                    </g>
-                    <rect x="40" y="180" width="40" height="70" className="fill-accent" />
-                    <rect x="120" y="120" width="40" height="130" className="fill-sage" />
-                    <rect x="200" y="150" width="40" height="100" className="fill-ink-muted" />
-                    <rect x="280" y="90" width="40" height="160" className="fill-highlight" />
-                  </svg>
+                  <WorkGraphic className="w-full h-full" />
                 </div>
               </div>
             </Link>
@@ -181,21 +164,6 @@ export default function Page() {
               <p className="mt-2 text-sm text-ink-muted">{desc}</p>
             </Reveal>
           ))}
-        </div>
-      </section>
-
-      {/* CTA banner */}
-      <section className="bg-highlight text-dragline-black">
-        <div className="container py-16 md:py-24 text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight">
-            Ready to build something serious?
-          </h2>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-md bg-dragline-black text-highlight px-6 py-3 text-sm font-semibold hover:opacity-90 transition-[opacity,transform] duration-150 ease-out-strong active:scale-[0.97]"
-          >
-            Start a Conversation
-          </Link>
         </div>
       </section>
     </div>

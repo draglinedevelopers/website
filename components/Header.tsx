@@ -14,8 +14,14 @@ const nav = [
   { href: '/services', label: 'Services' },
   { href: '/work', label: 'Work' },
   { href: '/about', label: 'About' },
+  { href: '/careers', label: 'Careers' },
   { href: '/contact', label: 'Contact' },
 ]
+
+// Desktop pill omits Home (the logo covers that) and Contact (it's the CTA pill).
+const desktopNav = nav.filter((item) => item.href !== '/' && item.href !== '/contact')
+
+const pill = 'rounded-full border border-line bg-surface/80 backdrop-blur-md supports-[backdrop-filter]:bg-surface/70 shadow-sm'
 
 // Crossfade + rotate between Sun/Moon instead of an instant unmount/remount swap.
 // Both icons stay mounted and stacked; only opacity/transform change on theme toggle.
@@ -64,52 +70,58 @@ export default function Header() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
-      <div className="container flex items-center justify-between py-3.5">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Dragline Developers"
-            width={28}
-            height={28}
-            priority
-            className="dark:invert"
-          />
-          <span className="font-display font-bold tracking-tight text-lg">DRAGLINE DEVELOPERS</span>
-        </Link>
+    <header className="fixed top-4 inset-x-0 z-50">
+      <div className="container flex items-center justify-between gap-4">
+        {/* Left pill: logo + primary nav */}
+        <div className={cn('flex items-center gap-7 pl-4 pr-5 py-2.5', pill)}>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/logo.png"
+              alt="Dragline Developers"
+              width={26}
+              height={26}
+              priority
+              className="dark:invert"
+            />
+          </Link>
 
-        <nav className="hidden md:flex items-center gap-7">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'text-sm text-ink-muted hover:text-ink transition-colors',
-                pathname === item.href && 'text-ink font-semibold'
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          <nav className="hidden md:flex items-center gap-6">
+            {desktopNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'text-sm text-ink-muted hover:text-ink transition-colors',
+                  pathname === item.href && 'text-ink font-semibold'
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
-        <div className="flex items-center gap-2">
+        {/* Right: theme toggle + CTA, each their own floating pill */}
+        <div className="flex items-center gap-3">
           {mounted && (
             <button
               type="button"
               onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-              className="hidden sm:inline-flex items-center justify-center h-9 w-9 rounded-md border border-line text-ink-muted hover:text-ink hover:border-ink transition-colors"
+              className={cn(
+                'hidden sm:inline-flex items-center justify-center h-11 w-11 text-ink-muted hover:text-ink transition-colors',
+                pill
+              )}
               aria-label="Toggle color theme"
             >
-              <ThemeIcon isDark={resolvedTheme === 'dark'} size={16} />
+              <ThemeIcon isDark={resolvedTheme === 'dark'} size={17} />
             </button>
           )}
-          <Button href="/contact" className="hidden sm:inline-flex">
-            Start a Project
+          <Button href="/contact" className="hidden sm:inline-flex shadow-sm">
+            Get in Touch
           </Button>
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-line"
+            className={cn('md:hidden inline-flex items-center justify-center h-11 w-11', pill)}
             onClick={() => setOpen(true)}
             aria-expanded={open}
             aria-controls="mobile-nav"
@@ -146,7 +158,7 @@ export default function Header() {
           <span className="font-mono-label text-ink-muted">Menu</span>
           <button
             type="button"
-            className="inline-flex items-center justify-center h-9 w-9 rounded-md border border-line"
+            className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-line"
             onClick={() => setOpen(false)}
             aria-label="Close navigation"
           >
@@ -178,7 +190,7 @@ export default function Header() {
             </button>
           )}
           <Button href="/contact" className="mt-4 w-full">
-            Start a Project
+            Get in Touch
           </Button>
         </div>
       </div>
