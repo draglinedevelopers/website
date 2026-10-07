@@ -50,6 +50,23 @@ body {
   outline-offset: 3px;
 }
 
+/*
+ * Intro pre-hide. `motion-intro` is added to <html> by an inline script before first paint, only
+ * when JS runs and motion is allowed, so no-JS and reduced-motion visitors never get it. GSAP
+ * removes the class as soon as it takes over. If GSAP never loads, the fail-safe animation
+ * reveals the content after 2.5s anyway.
+ */
+.motion-intro [data-intro] {
+  opacity: 0;
+  animation: intro-failsafe 0.4s ease-out 2.5s forwards;
+}
+
+@keyframes intro-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

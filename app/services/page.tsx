@@ -45,7 +45,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
 
   return (
     <Section tone={dark ? "dark" : "light"} id={service.slug} aria-labelledby={`${service.slug}-heading`}>
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[100px]">
+      <div data-reveal-stagger className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[100px]">
         <div className="flex flex-col gap-7 lg:w-[410px] lg:shrink-0">
           <Eyebrow tone={dark ? "dark" : "light"}>
             {service.number} / {service.stage}
@@ -56,7 +56,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
           <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.description}</p>
           <div className={`h-px ${t.divider}`} />
           <p className={`text-[21px] ${t.heading}`}>Starting from {service.startingPrice}</p>
-          <Button href={bookCallHref} className="w-full lg:w-auto lg:self-start">
+          <Button href={bookCallHref} magnetic className="w-full lg:w-auto lg:self-start">
             Book a free call
           </Button>
         </div>

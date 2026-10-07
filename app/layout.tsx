@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import ThreadLine from "@/components/motion/ThreadLine";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import { site } from "@/lib/site";
@@ -31,17 +33,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={inter.variable}>
+    // suppressHydrationWarning: the inline script below may add `motion-intro` before React hydrates.
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if(matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('motion-intro')",
+          }}
+        />
+      </head>
       <body className="font-sans">
+        <SmoothScroll />
         <Nav />
         {/* The continuous dragline runs from under the nav to the top of the footer. */}
-        <div className="relative">
+        <ThreadLine>
           <main>{children}</main>
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-[9px] z-10 w-px bg-thread opacity-28 lg:left-[32px]"
-          />
-        </div>
+        </ThreadLine>
         <Footer />
       </body>
     </html>

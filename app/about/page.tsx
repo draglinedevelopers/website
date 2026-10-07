@@ -56,7 +56,7 @@ export default function AboutPage() {
         <h2 id="team-heading" className="text-heading font-semibold text-ink">
           Different skills. One thread.
         </h2>
-        <ul className="grid gap-9 lg:grid-cols-3 lg:gap-6">
+        <ul data-reveal-stagger className="grid gap-9 lg:grid-cols-3 lg:gap-6">
           {team.map((member) => (
             <li key={member.role} className="flex flex-col gap-5">
               <Media
@@ -79,7 +79,7 @@ export default function AboutPage() {
         <h2 id="values-heading" className="text-heading font-semibold text-ink">
           Good work starts with how.
         </h2>
-        <ol className="grid gap-9 lg:grid-cols-3 lg:gap-10">
+        <ol data-reveal-stagger className="grid gap-9 lg:grid-cols-3 lg:gap-10">
           {values.map((value, i) => (
             <li key={value.title} className="flex flex-col gap-5">
               <div className="h-px bg-line" />
