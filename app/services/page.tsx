@@ -1,161 +1,119 @@
-import PageHero from '@/components/PageHero'
-import { Button } from '@/components/Button'
-import Reveal from '@/components/Reveal'
-import { serviceAccent, accentClass } from '@/lib/accents'
+import type { Metadata } from "next";
+import ClosingInvitation from "@/components/sections/ClosingInvitation";
+import Button from "@/components/ui/Button";
+import Section, { Eyebrow } from "@/components/ui/Section";
+import { services, type Service } from "@/data/services";
+import { bookCallHref } from "@/lib/site";
 
-export const metadata = {
-  title: 'Services',
-  description: 'Five practice areas, one team: Digital Product Development, APIs & Integrations, Business Automation & AI, Design, and Technology Consulting.',
-}
-
-const services = [
-  {
-    id: 'digital-products',
-    number: '01',
-    title: 'Digital Product Development',
-    positioning: 'Your customers experience your business through your product. We make sure that experience earns their trust.',
-    deliverables: [
-      'Web applications (desktop and mobile-responsive)',
-      'Mobile apps, iOS and Android',
-      'Customer portals and dashboards',
-      'E-commerce platforms and storefronts',
-      'MVP development for startups',
-    ],
-    whoFor: 'Startups and growing businesses that need a product built properly from the start, not patched together and retrofitted later.',
-  },
-  {
-    id: 'api-integrations',
-    number: '02',
-    title: 'APIs & Integrations',
-    positioning: 'Your business runs on systems that need to work together. We build the connections that make that possible.',
-    deliverables: [
-      'Secure REST and GraphQL API design and development',
-      'Webhook pipelines and third-party integrations',
-      'Rate limiting, authentication, and API versioning',
-      'Payment gateway and platform integrations',
-      'API documentation and developer support',
-    ],
-    whoFor: 'Businesses whose products or operations depend on multiple systems working together reliably, and teams that need a clean, well-documented API their partners can build on.',
-  },
-  {
-    id: 'automation-ai',
-    number: '03',
-    title: 'Business Automation & AI',
-    positioning: 'Manual processes are a tax on your business. We replace them with systems that work while you sleep.',
-    deliverables: [
-      'Workflow automation (n8n, Make, and custom pipelines)',
-      'AI-powered sales agents and customer assistants',
-      'CRM, ERP, and third-party system integrations',
-      'WhatsApp commerce automation (order management, payments)',
-      'Internal tooling and operational dashboards',
-      'Inventory and operations management systems',
-    ],
-    whoFor: 'Businesses growing fast but being held back by repetitive, manual operations, and founders who want technology to work for them, not the other way around.',
-  },
-  {
-    id: 'design',
-    number: '04',
-    title: 'Design',
-    positioning: 'Before your product is built, it needs to be understood. Design is how we make complex things feel simple.',
-    deliverables: [
-      'UI/UX design for web and mobile products',
-      'Product design systems and component libraries',
-      'Prototyping and interactive mockups',
-      'User research and usability testing',
-      'Brand identity for digital products',
-    ],
-    whoFor: 'Businesses building something new or improving something that currently confuses or frustrates their customers.',
-  },
-  {
-    id: 'technology-consulting',
-    number: '05',
-    title: 'Technology Consulting',
-    positioning: 'Not every problem needs code. Sometimes it needs clarity first.',
-    deliverables: [
-      'Technology audits (what you have, what’s working, what isn’t)',
-      'Digital roadmaps and phased build plans',
-      'Vendor and tool selection',
-      'Build vs. buy analysis',
-      'Team structure and hiring advice for technology roles',
-    ],
-    whoFor: 'Founders and leadership teams who need to understand their technology landscape before committing to a direction, and who want an honest, independent view.',
-  },
-]
-
-const engagementModels = [
-  {
-    title: 'Project-Based',
-    desc: 'Fixed scope, fixed delivery, fixed price. Best for clients with a defined problem and clear outcome. Typically shorter engagements.',
-  },
-  {
-    title: 'Retainer',
-    desc: 'Ongoing work, predictable output, monthly billing. Best for businesses that want a long-term technology partner rather than one-off projects.',
-  },
-  {
-    title: 'Consulting',
-    desc: 'Strategic engagements billed by day or hour. Best as a starting point for complex situations where the right direction isn’t yet clear. Often converts to full delivery work.',
-  },
-]
+export const metadata: Metadata = {
+  title: "Services",
+  description: "Website in 14 Days, App Design Sprint and Monthly Care Plan. Clear scopes, fixed prices.",
+};
 
 export default function ServicesPage() {
   return (
-    <div>
-      <PageHero eyebrow="Services" title="What We Build">
-        Five practice areas. One team. Everything your business needs to operate, grow, and
-        compete in a digital world.
-      </PageHero>
+    <>
+      <Section gap="gap-8" aria-labelledby="services-heading">
+        <Eyebrow>Services / Clear by design</Eyebrow>
+        <h1 id="services-heading" className="text-display font-semibold text-ink">
+          A focused scope. <br className="hidden lg:block" />A stronger connection.
+        </h1>
+        <div className="flex max-w-[650px] flex-col gap-5 text-muted">
+          <p className="text-[16px] leading-[1.6]">
+            A website, a product interface or ongoing care. Choose the starting point that fits your business, then
+            we’ll agree exactly what’s involved.
+          </p>
+          <p className="text-[13px] leading-[1.5]">
+            The scopes below are proposed starting points, refined together on your free call.
+          </p>
+        </div>
+      </Section>
 
-      <div className="container border-t border-line divide-y divide-line">
-        {services.map((s, i) => {
-          const a = accentClass[serviceAccent[s.id]]
-          return (
-            <Reveal
-              id={s.id}
-              key={s.id}
-              delay={i * 60}
-              className="grid md:grid-cols-[56px_1fr_1fr] gap-4 md:gap-10 py-10 md:py-12"
-            >
-              <span className={`font-mono text-sm ${a.text}`}>{s.number}</span>
+      {services.map((service, i) => (
+        <ServiceOffer key={service.slug} service={service} dark={i % 2 === 0} />
+      ))}
 
-              <div>
-                <h2 className="font-display text-2xl font-semibold">{s.title}</h2>
-                <p className="mt-3 text-ink-muted">{s.positioning}</p>
-                <p className="mt-6 text-sm text-ink-muted">
-                  <span className="font-mono-label text-ink-muted">Who it&apos;s for — </span>
-                  {s.whoFor}
-                </p>
-              </div>
+      <ClosingInvitation />
+    </>
+  );
+}
 
-              <div>
-                <h3 className="font-mono-label text-ink-muted mb-3">Deliverables</h3>
-                <ul className="space-y-2 text-ink-muted">
-                  {s.deliverables.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          )
-        })}
-      </div>
+function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
+  const t = dark
+    ? { heading: "text-white", body: "text-muted-dark", divider: "bg-line-dark", border: "border-line-dark" }
+    : { heading: "text-ink", body: "text-muted", divider: "bg-line", border: "border-line" };
 
-      <section className="border-t border-line bg-surface">
-        <div className="container py-16 md:py-20">
-          <h2 className="font-display text-2xl font-bold tracking-tight">How we work with clients</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            {engagementModels.map((m) => (
-              <div key={m.title} className="rounded-2xl bg-paper p-6">
-                <h3 className="font-semibold">{m.title}</h3>
-                <p className="mt-2 text-sm text-ink-muted">{m.desc}</p>
-              </div>
-            ))}
+  return (
+    <Section tone={dark ? "dark" : "light"} id={service.slug} aria-labelledby={`${service.slug}-heading`}>
+      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-[100px]">
+        <div className="flex flex-col gap-7 lg:w-[410px] lg:shrink-0">
+          <Eyebrow tone={dark ? "dark" : "light"}>
+            {service.number} / {service.stage}
+          </Eyebrow>
+          <h2 id={`${service.slug}-heading`} className={`text-heading font-semibold ${t.heading}`}>
+            {service.title}
+          </h2>
+          <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.description}</p>
+          <div className={`h-px ${t.divider}`} />
+          <p className={`text-[21px] ${t.heading}`}>Starting from {service.startingPrice}</p>
+          <Button href={bookCallHref} className="w-full lg:w-auto lg:self-start">
+            Book a free call
+          </Button>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col gap-10">
+          <div className="flex flex-col gap-3">
+            <h3 className={`text-[18px] font-medium ${t.heading}`}>Who it’s for</h3>
+            <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.audience}</p>
           </div>
-          <p className="mt-10 text-lg font-medium">Not sure where to start? Let&apos;s figure it out together.</p>
-          <div className="mt-5">
-            <Button href="/contact">Start a Project</Button>
+
+          <div className="flex flex-col gap-9 lg:flex-row lg:gap-10">
+            <ScopeList title="What’s included" items={service.included} t={t} />
+            <ScopeList title="What’s not included" items={service.excluded} t={t} />
+          </div>
+
+          {service.upgrade && (
+            <div className={`flex flex-col gap-3 border p-6 ${t.border}`}>
+              <p className={`text-[12px] font-semibold uppercase ${t.body}`}>Optional upgrade</p>
+              <h3 className={`text-[23px] ${t.heading}`}>{service.upgrade.title}</h3>
+              <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.upgrade.description}</p>
+            </div>
+          )}
+
+          <div className={`h-px ${t.divider}`} />
+          <div className="flex flex-col gap-[10px]">
+            <p className={`text-[22px] ${t.heading}`}>Timeline / {service.timeline.value}</p>
+            <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.timeline.note}</p>
           </div>
         </div>
-      </section>
+      </div>
+    </Section>
+  );
+}
+
+function ScopeList({
+  title,
+  items,
+  t,
+}: {
+  title: string;
+  items: string[];
+  t: { heading: string; body: string; divider: string };
+}) {
+  return (
+    <div className="flex flex-1 flex-col gap-5">
+      <h3 className={`text-[18px] font-medium ${t.heading}`}>{title}</h3>
+      <div className={`h-px ${t.divider}`} />
+      <ul className="flex flex-col gap-5">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-3">
+            <span aria-hidden className="text-[14px] text-thread">
+              —
+            </span>
+            <span className={`flex-1 text-[16px] leading-[1.5] ${t.body}`}>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }

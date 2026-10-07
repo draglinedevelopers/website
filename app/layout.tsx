@@ -1,39 +1,22 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google'
-import Header from '@/components/Header'
-import CTASection from '@/components/CTASection'
-import Footer from '@/components/Footer'
-import ThemeProvider from '@/components/ThemeProvider'
-import SmoothScroll from '@/components/SmoothScroll'
-import { site } from '@/lib/metadata'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Nav from "@/components/site/Nav";
+import Footer from "@/components/site/Footer";
+import { site } from "@/lib/site";
+import "./globals.css";
 
-const display = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const body = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-body',
-  display: 'swap',
-})
-
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-})
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} · ${site.tagline}`,
-    template: `%s · ${site.name}`
+    template: `%s · ${site.name}`,
   },
   description: site.description,
   openGraph: {
@@ -41,32 +24,26 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
     siteName: site.name,
-    type: 'website'
+    type: "website",
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: site.name,
-    description: site.description
-  },
-  icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png'
-  }
-}
+  icons: { icon: "/logo.png", apple: "/logo.png" },
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`} suppressHydrationWarning>
-      <body>
-        <ThemeProvider>
-          <SmoothScroll />
-          <Header />
-          <main className="pt-24">{children}</main>
-          <CTASection />
-          <Footer />
-        </ThemeProvider>
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans">
+        <Nav />
+        {/* The continuous dragline runs from under the nav to the top of the footer. */}
+        <div className="relative">
+          <main>{children}</main>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-[9px] z-10 w-px bg-thread opacity-28 lg:left-[32px]"
+          />
+        </div>
+        <Footer />
       </body>
     </html>
-  )
+  );
 }

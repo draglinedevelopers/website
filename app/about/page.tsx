@@ -1,94 +1,97 @@
-import PageHero from '@/components/PageHero'
-import Reveal from '@/components/Reveal'
-import ArrowLink from '@/components/ArrowLink'
-import { User } from '@phosphor-icons/react/dist/ssr'
+import type { Metadata } from "next";
+import { Media } from "@/components/cards/ProjectCard";
+import ClosingInvitation from "@/components/sections/ClosingInvitation";
+import WhyDragline from "@/components/sections/WhyDragline";
+import Section, { Eyebrow } from "@/components/ui/Section";
+import { team } from "@/data/team";
 
-export const metadata = {
-  title: 'About',
-  description: 'Why Dragline Developers exists, what we believe, and the team behind the work.',
-}
+export const metadata: Metadata = {
+  title: "About",
+  description: "A Nigeria-based design and build studio for growing businesses and founders.",
+};
 
-const team = [
-  { role: 'CEO', dept: 'AI Automation & Strategy' },
-  { role: 'COO', dept: 'Operations & Delivery' },
-  { role: 'CTO', dept: 'Engineering & Technical Architecture' },
-  { role: 'Lead Product Designer', dept: 'Design & User Experience' },
-]
-
-const principles = [
+const values = [
   {
-    title: 'Business first, technology second.',
-    desc: "We don't recommend tools we can't justify. Every solution maps to a real business outcome. If something doesn't make the business better, we won't build it.",
+    title: "Clarity",
+    body: "We define the problem, the scope and the next step. You should always know what we’re doing and why.",
   },
   {
-    title: 'Small teams, serious work.',
-    desc: "We don't use team size as a proxy for quality. We use results. Every project gets senior attention, not handoffs down a chain.",
+    title: "Craft",
+    body: "We care about the details that make a website or product feel considered, readable and useful.",
   },
   {
-    title: 'We build for ourselves too.',
-    desc: "Dragline's own products are built on the same systems we build for clients. We have skin in the game. If it doesn't hold up under our own use, it doesn't go to a client.",
+    title: "Momentum",
+    body: "We keep the work moving with focused stages, practical feedback and a clear path to launch.",
   },
-]
+];
 
 export default function AboutPage() {
   return (
-    <div>
-      <PageHero eyebrow="About" title="Why Dragline Exists" />
-
-      <section className="container py-16 md:py-20 space-y-5 max-w-2xl">
-        <p className="text-ink-muted">
-          Dragline was built on a simple observation: most technology companies build what they
-          know how to build, not what a business actually needs. The result is expensive tools
-          that don&apos;t fit, integrations that break, and founders who know less about their own
-          systems than their vendors do.
-        </p>
-        <p className="text-ink-muted">
-          We started Dragline to do it differently. We sit with the business problem first. We
-          understand the customer, the operation, the market. Then we build, whether that&apos;s a
-          product, an automation, a design system, or a strategic roadmap.
-        </p>
-        <p className="text-ink-muted">
-          The name is deliberate. The dragline thread is the strongest silk a spider produces: the
-          one it uses to navigate, build, and connect to its world. That&apos;s what we do for the
-          businesses we work with.
-        </p>
-      </section>
-
-      <section className="border-t border-line bg-surface">
-        <div className="container py-16 md:py-20">
-          <h2 className="font-display text-2xl font-bold tracking-tight">The Team</h2>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {team.map((t, i) => (
-              <Reveal key={t.role} delay={i * 60} className="rounded-2xl bg-paper p-6 flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-surface text-ink-muted">
-                  <User size={22} weight="regular" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">{t.role}</h3>
-                  <p className="mt-1 text-sm text-ink-muted">{t.dept}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+    <>
+      <Section tone="dark" gap="gap-8" aria-labelledby="about-heading">
+        <Eyebrow tone="dark">About / Dragline Developers</Eyebrow>
+        <h1 id="about-heading" className="text-display font-semibold text-white">
+          Built on strong connections.
+        </h1>
+        <div className="flex max-w-[650px] flex-col gap-5 text-muted-dark">
+          <p className="text-[16px] leading-[1.6]">
+            We’re a Nigeria-based design and build studio for growing businesses and founders, locally and
+            internationally. We bring design and development together to make your next step clearer.
+          </p>
+          <p className="text-[13px] leading-[1.5]">WEBSITES / DIGITAL PRODUCTS / ONGOING CARE</p>
         </div>
-      </section>
+      </Section>
 
-      <section className="container py-16 md:py-20">
-        <h2 className="font-display text-2xl font-bold tracking-tight">What We Believe</h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-3">
-          {principles.map((p, i) => (
-            <Reveal key={p.title} delay={i * 60}>
-              <h3 className="font-semibold">{p.title}</h3>
-              <p className="mt-2 text-sm text-ink-muted">{p.desc}</p>
-            </Reveal>
+      <WhyDragline />
+
+      <Section tone="dark" aria-labelledby="mission-heading">
+        <Eyebrow tone="dark">Our mission</Eyebrow>
+        <h2 id="mission-heading" className="text-heading font-semibold text-white">
+          Build the strongest threads between businesses and the bigger web
+        </h2>
+      </Section>
+
+      <Section aria-labelledby="team-heading">
+        <Eyebrow>The team</Eyebrow>
+        <h2 id="team-heading" className="text-heading font-semibold text-ink">
+          Different skills. One thread.
+        </h2>
+        <ul className="grid gap-9 lg:grid-cols-3 lg:gap-6">
+          {team.map((member) => (
+            <li key={member.role} className="flex flex-col gap-5">
+              <Media
+                image={member.photo}
+                label="[Photo]"
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="h-[310px] lg:h-[360px]"
+              />
+              <div className="flex flex-col gap-1">
+                {member.name && <p className="text-[16px] text-muted">{member.name}</p>}
+                <p className="text-[24px] text-black">{member.role}</p>
+              </div>
+            </li>
           ))}
-        </div>
-        <div className="mt-10">
-          <ArrowLink href="/contact" className="text-lg font-medium text-ink hover:text-highlight">
-            Want to know more? Come talk to us.
-          </ArrowLink>
-        </div>
-      </section>
-    </div>
-  )
+        </ul>
+      </Section>
+
+      <Section tone="mist" aria-labelledby="values-heading">
+        <Eyebrow>How we work</Eyebrow>
+        <h2 id="values-heading" className="text-heading font-semibold text-ink">
+          Good work starts with how.
+        </h2>
+        <ol className="grid gap-9 lg:grid-cols-3 lg:gap-10">
+          {values.map((value, i) => (
+            <li key={value.title} className="flex flex-col gap-5">
+              <div className="h-px bg-line" />
+              <span className="text-[12px] text-ink">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="text-[30px] text-black">{value.title}</h3>
+              <p className="text-[16px] leading-[1.6] text-muted">{value.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <ClosingInvitation />
+    </>
+  );
 }

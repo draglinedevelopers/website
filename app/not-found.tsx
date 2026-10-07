@@ -1,15 +1,14 @@
-import { Button } from '@/components/Button'
-import Reveal from '@/components/Reveal'
+import Button from "@/components/ui/Button";
+import Section, { Eyebrow } from "@/components/ui/Section";
 
 export default function NotFound() {
   return (
-    <Reveal className="container py-24 md:py-32 text-center flex flex-col items-center">
-      <p className="font-mono-label text-ink-muted">404</p>
-      <h1 className="mt-3 font-display text-3xl md:text-4xl font-bold tracking-tight">Page not found</h1>
-      <p className="mt-3 text-ink-muted max-w-md">The page you requested does not exist.</p>
-      <div className="mt-8">
-        <Button href="/" variant="secondary">Go home</Button>
-      </div>
-    </Reveal>
-  )
+    <Section tone="dark" gap="gap-8" className="min-h-[60vh]">
+      <Eyebrow tone="dark">404 / Page not found</Eyebrow>
+      <h1 className="text-display font-semibold text-white">This thread doesn’t lead anywhere.</h1>
+      <Button href="/" className="w-full lg:w-auto lg:self-start">
+        Back to home
+      </Button>
+    </Section>
+  );
 }

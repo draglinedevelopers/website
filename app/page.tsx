@@ -1,171 +1,151 @@
-import Link from 'next/link'
-import Hero from '@/components/Hero'
-import Reveal from '@/components/Reveal'
-import ArrowLink from '@/components/ArrowLink'
-import WorkGraphic from '@/components/WorkGraphic'
-import { serviceAccent, accentClass } from '@/lib/accents'
-import { cases } from '@/lib/work'
-import {
-  AppWindow,
-  Plugs,
-  Robot,
-  PenNib,
-  Compass,
-  GlobeHemisphereWest,
-  Package,
-  Wrench,
-  ArrowUpRight,
-} from '@phosphor-icons/react/dist/ssr'
+import Image from "next/image";
+import ProjectCard from "@/components/cards/ProjectCard";
+import ServiceCard from "@/components/cards/ServiceCard";
+import FaqList from "@/components/FaqList";
+import ClientWords from "@/components/sections/ClientWords";
+import ClosingInvitation from "@/components/sections/ClosingInvitation";
+import WhyDragline from "@/components/sections/WhyDragline";
+import Button from "@/components/ui/Button";
+import Section, { Eyebrow } from "@/components/ui/Section";
+import { faqs } from "@/data/faqs";
+import { featuredProjects } from "@/data/projects";
+import { services } from "@/data/services";
+import { bookCallHref } from "@/lib/site";
 
-const services = [
-  {
-    id: 'digital-products',
-    title: 'Digital Products',
-    desc: 'Web apps, mobile apps, and customer platforms built to perform.',
-    icon: AppWindow,
-  },
-  {
-    id: 'api-integrations',
-    title: 'APIs & Integrations',
-    desc: 'Secure APIs and reliable integrations that let your systems work together.',
-    icon: Plugs,
-  },
-  {
-    id: 'automation-ai',
-    title: 'Automation & AI',
-    desc: 'Replacing manual processes with intelligent, connected systems.',
-    icon: Robot,
-  },
-  {
-    id: 'design',
-    title: 'Design',
-    desc: 'Product design and brand systems that make businesses look and feel credible.',
-    icon: PenNib,
-  },
-  {
-    id: 'technology-consulting',
-    title: 'Technology Consulting',
-    desc: 'Technology strategy and roadmaps before the first line of code is written.',
-    icon: Compass,
-  },
-]
+const promises = ["Fixed scope", "Fixed price", "On time"];
 
-const proofPoints = [
-  {
-    title: 'Global Team, Local Context',
-    desc: 'We understand the markets our clients operate in, not just the technology. Solutions are built for how business actually works in your environment.',
-    icon: GlobeHemisphereWest,
-  },
-  {
-    title: 'Full-Stack Delivery',
-    desc: 'Strategy, design, development, and automation under one roof. No handoffs to unknown subcontractors. One team, end to end.',
-    icon: Package,
-  },
-  {
-    title: "We've Built It Ourselves",
-    desc: "Dragline's own products are built on the same stack we build for clients. We don't recommend what we haven't done.",
-    icon: Wrench,
-  },
-]
+const steps = [
+  { title: "Free call", body: "Tell us about your business, your goals and what you need next." },
+  { title: "Proposal and deposit", body: "Agree the scope, price and schedule. A deposit gets work started." },
+  { title: "Design and build", body: "We turn the agreed direction into a considered, working experience." },
+  { title: "Launch and handover", body: "We launch together and show you how to manage what we’ve built." },
+];
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <div>
-      <Hero />
-
-      {/* Positioning statement */}
-      <section className="bg-surface border-b border-line">
-        <div className="container py-20 md:py-28">
-          <p className="text-xl md:text-2xl leading-relaxed max-w-3xl">
-            Most businesses know they need better technology. The problem is finding a team that
-            understands the business first, then builds the right thing, instead of overselling
-            tools that create more problems than they solve.
-          </p>
-          <p className="mt-6 text-xl md:text-2xl font-semibold max-w-3xl">
-            That&apos;s the gap Dragline exists to fill.
-          </p>
+    <>
+      {/* Hero */}
+      <Section tone="dark" aria-labelledby="hero-heading">
+        <div className="flex items-start justify-between text-[12px] text-muted-dark">
+          <p className="font-semibold uppercase">Design &amp; build studio</p>
+          <p className="hidden lg:block">NIGERIA → EVERYWHERE</p>
         </div>
-      </section>
-
-      {/* What we do */}
-      <section className="container py-16 md:py-24">
-        <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight max-w-xl">
-          What we do
-        </h2>
-        <div className="mt-8 grid sm:grid-cols-2 gap-5">
-          {services.map(({ id, title, desc, icon: Icon }, i) => {
-            const a = accentClass[serviceAccent[id]]
-            const isLast = i === services.length - 1
-            return (
-              <Reveal key={id} delay={i * 60} className={isLast ? 'sm:col-span-2' : ''}>
-                <Link
-                  href={`/services#${id}`}
-                  className="group block h-full rounded-2xl bg-surface p-8 md:p-9 transition-[transform,box-shadow] duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-lg"
-                >
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-paper">
-                    <Icon size={22} weight="regular" className={a.text} />
-                  </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold">{title}</h3>
-                  <p className="mt-2 text-sm text-ink-muted">{desc}</p>
-                  <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium text-ink-muted ${a.hoverText}`}>
-                    See more <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </Link>
-              </Reveal>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Work snapshot */}
-      <section className="border-t border-line bg-surface">
-        <div className="container py-16 md:py-24">
-          <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight max-w-xl">
-            What we&apos;ve built
-          </h2>
-          <Reveal>
-            <Link
-              href={`/work/${cases[0].slug}`}
-              className="group mt-8 block rounded-2xl overflow-hidden bg-paper transition-[transform,box-shadow] duration-200 ease-out-strong hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              <div className="grid md:grid-cols-2">
-                <div className="p-8 md:p-10 flex flex-col justify-center">
-                  <span className="font-mono-label text-ink-muted">{cases[0].category}</span>
-                  <h3 className="mt-3 font-display text-2xl font-semibold">{cases[0].title}</h3>
-                  <p className="mt-3 text-ink-muted max-w-md">{cases[0].summary}</p>
-                  <span className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-ink group-hover:text-highlight">
-                    View Project <ArrowUpRight size={14} className="transition-transform duration-150 ease-out-strong group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </div>
-                <div className="relative aspect-[4/3] md:aspect-auto">
-                  <WorkGraphic className="w-full h-full" />
-                </div>
-              </div>
-            </Link>
-          </Reveal>
-          <div className="mt-6">
-            <ArrowLink href="/work" className="text-sm font-medium text-ink hover:text-highlight">
-              See all work
-            </ArrowLink>
+        <div className="flex max-w-[1160px] flex-col gap-8">
+          <h1 id="hero-heading" className="text-display font-semibold text-white">
+            Connecting businesses <br className="hidden lg:block" />
+            to the bigger web.
+          </h1>
+          <div className="flex max-w-[590px] flex-col gap-8">
+            <p className="text-[18px] leading-[1.5] text-muted-dark lg:text-[21px]">
+              We design and build websites and digital products for growing businesses.
+            </p>
+            <div className="flex flex-col gap-3 lg:flex-row">
+              <Button href={bookCallHref} className="w-full lg:w-auto">
+                Book a free call
+              </Button>
+              <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
+                See our work
+              </Button>
+            </div>
           </div>
         </div>
-      </section>
+        <div className="flex items-start justify-between pt-6 text-[12px] text-muted-dark">
+          <p>For growing businesses. For what comes next.</p>
+          <p className="hidden lg:block">FOLLOW THE THREAD ↓</p>
+        </div>
+      </Section>
 
-      {/* Why Dragline */}
-      <section className="container py-16 md:py-24">
-        <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight max-w-xl">
-          Why Dragline
-        </h2>
-        <div className="mt-10 grid sm:grid-cols-3 gap-8">
-          {proofPoints.map(({ title, desc, icon: Icon }, i) => (
-            <Reveal key={title} delay={i * 60}>
-              <Icon size={24} weight="regular" />
-              <h3 className="mt-4 font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-ink-muted">{desc}</p>
-            </Reveal>
+      {/* Promise strip */}
+      <div className="border-b border-line px-6 py-8 md:px-10 lg:px-20">
+        <ul className="mx-auto flex max-w-[1280px] flex-col gap-[22px] lg:flex-row lg:justify-between">
+          {promises.map((promise) => (
+            <li key={promise} className="flex items-center gap-[14px]">
+              <Image src="/figma/promise-node.svg" alt="" width={6} height={6} unoptimized />
+              <span className="text-[20px] font-medium text-black lg:text-[24px]">{promise}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* 01 / What we do */}
+      <Section aria-labelledby="services-heading">
+        <Eyebrow>01 / What we do</Eyebrow>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-[140px]">
+          <h2 id="services-heading" className="text-heading flex-1 font-semibold text-ink">
+            The right starting point.
+          </h2>
+          <p className="flex-1 text-[16px] leading-[1.6] text-muted">
+            Three focused ways to move your business forward. Clear deliverables, from the first conversation.
+          </p>
+        </div>
+        <div className="grid gap-5 lg:grid-cols-3">
+          {services.map((service) => (
+            <ServiceCard key={service.slug} service={service} />
           ))}
         </div>
-      </section>
-    </div>
-  )
+      </Section>
+
+      {/* 02 / Selected work */}
+      <Section tone="mist" aria-labelledby="work-heading">
+        <Eyebrow>02 / Selected work</Eyebrow>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end">
+          <h2 id="work-heading" className="text-heading flex-1 font-semibold text-ink">
+            A few threads we&apos;ve built.
+          </h2>
+          <Button href="/work" variant="secondary-light" className="w-full lg:w-auto">
+            View all work
+          </Button>
+        </div>
+        <div className="grid gap-10 lg:grid-cols-3 lg:gap-6">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+      </Section>
+
+      {/* 03 / How we work */}
+      <Section tone="dark" aria-labelledby="process-heading">
+        <Eyebrow tone="dark">03 / How we work</Eyebrow>
+        <h2 id="process-heading" className="text-heading font-semibold text-white">
+          A clear path from here to live.
+        </h2>
+        <ol className="flex flex-col lg:flex-row lg:gap-7">
+          {steps.map((step, i) => (
+            <li key={step.title} className="flex flex-1 flex-col gap-5 pb-9 lg:pb-0">
+              <div className="flex items-center gap-4">
+                <span className="flex size-11 items-center justify-center rounded-full border border-line-dark text-[14px] text-white">
+                  {i + 1}
+                </span>
+                <span aria-hidden className="h-px flex-1 bg-line-dark" />
+              </div>
+              <h3 className="text-[24px] text-white">{step.title}</h3>
+              <p className="text-[16px] leading-[1.6] text-muted-dark">{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <WhyDragline />
+
+      <ClientWords />
+
+      {/* FAQ */}
+      <Section aria-labelledby="faq-heading">
+        <div className="flex flex-col gap-10 lg:flex-row lg:gap-[100px]">
+          <div className="flex flex-col gap-6 lg:w-[400px]">
+            <Eyebrow>A little clarity</Eyebrow>
+            <h2 id="faq-heading" className="text-heading font-semibold text-ink">
+              Before we begin.
+            </h2>
+            <p className="text-[16px] leading-[1.6] text-muted">A few things you might be wondering.</p>
+          </div>
+          <div className="flex-1">
+            <FaqList faqs={faqs} />
+          </div>
+        </div>
+      </Section>
+
+      <ClosingInvitation />
+    </>
+  );
 }
