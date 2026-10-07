@@ -24,7 +24,7 @@ export default function ContactPage() {
       </Section>
 
       <Section aria-labelledby="enquiry-heading">
-        <div className="flex flex-col gap-16 lg:flex-row lg:items-start xl:gap-[120px]">
+        <div data-reveal-stagger className="flex flex-col gap-16 lg:flex-row lg:items-start xl:gap-[120px]">
           <div className="flex min-w-0 flex-1 flex-col gap-7">
             <h2 id="enquiry-heading" className="text-[28px] text-black lg:text-[34px]">
               A little about your project.

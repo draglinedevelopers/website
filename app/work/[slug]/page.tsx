@@ -58,7 +58,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       </Section>
 
       <Section aria-labelledby="narrative-heading">
-        <div className="flex flex-col gap-10 lg:flex-row lg:gap-[100px]">
+        <div data-reveal-stagger className="flex flex-col gap-10 lg:flex-row lg:gap-[100px]">
           <div className="flex flex-col gap-6 lg:w-[400px] lg:shrink-0">
             <Eyebrow>The project</Eyebrow>
             <h2 id="narrative-heading" className="text-heading font-semibold text-ink">
@@ -83,7 +83,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       <Section tone="mist" aria-label="Project gallery">
         <Eyebrow>A closer look</Eyebrow>
         <Media image={wide} className="h-[260px] lg:h-[520px]" />
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div data-reveal-stagger className="grid gap-6 lg:grid-cols-2">
           <Media image={left} sizes="(min-width: 1024px) 50vw, 100vw" className="h-[260px] lg:h-[380px]" />
           <Media image={right} sizes="(min-width: 1024px) 50vw, 100vw" className="h-[260px] lg:h-[380px]" />
         </div>

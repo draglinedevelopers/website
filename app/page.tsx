@@ -2,6 +2,8 @@ import Image from "next/image";
 import ProjectCard from "@/components/cards/ProjectCard";
 import ServiceCard from "@/components/cards/ServiceCard";
 import FaqList from "@/components/FaqList";
+import HeroIntro from "@/components/motion/HeroIntro";
+import ProcessSteps from "@/components/motion/ProcessSteps";
 import ClientWords from "@/components/sections/ClientWords";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import WhyDragline from "@/components/sections/WhyDragline";
@@ -25,35 +27,37 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <Section tone="dark" aria-labelledby="hero-heading">
-        <div className="flex items-start justify-between text-[12px] text-muted-dark">
-          <p className="font-semibold uppercase">Design &amp; build studio</p>
-          <p className="hidden lg:block">NIGERIA → EVERYWHERE</p>
-        </div>
-        <div className="flex max-w-[1160px] flex-col gap-8">
-          <h1 id="hero-heading" className="text-display font-semibold text-white">
-            Connecting businesses <br className="hidden lg:block" />
-            to the bigger web.
-          </h1>
-          <div className="flex max-w-[590px] flex-col gap-8">
-            <p className="text-[18px] leading-[1.5] text-muted-dark lg:text-[21px]">
-              We design and build websites and digital products for growing businesses.
-            </p>
-            <div className="flex flex-col gap-3 lg:flex-row">
-              <Button href={bookCallHref} className="w-full lg:w-auto">
-                Book a free call
-              </Button>
-              <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
-                See our work
-              </Button>
+      <HeroIntro>
+        <Section tone="dark" reveal={false} aria-labelledby="hero-heading">
+          <div className="flex items-start justify-between text-[12px] text-muted-dark">
+            <p className="font-semibold uppercase">Design &amp; build studio</p>
+            <p className="hidden lg:block">NIGERIA → EVERYWHERE</p>
+          </div>
+          <div className="flex max-w-[1160px] flex-col gap-8">
+            <h1 id="hero-heading" data-intro="headline" className="text-display font-semibold text-white">
+              Connecting businesses <br className="hidden lg:block" />
+              to the bigger web.
+            </h1>
+            <div className="flex max-w-[590px] flex-col gap-8">
+              <p data-intro="fade" className="text-[18px] leading-[1.5] text-muted-dark lg:text-[21px]">
+                We design and build websites and digital products for growing businesses.
+              </p>
+              <div data-intro="fade" className="flex flex-col gap-3 lg:flex-row">
+                <Button href={bookCallHref} magnetic className="w-full lg:w-auto">
+                  Book a free call
+                </Button>
+                <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
+                  See our work
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-start justify-between pt-6 text-[12px] text-muted-dark">
-          <p>For growing businesses. For what comes next.</p>
-          <p className="hidden lg:block">FOLLOW THE THREAD ↓</p>
-        </div>
-      </Section>
+          <div className="flex items-start justify-between pt-6 text-[12px] text-muted-dark">
+            <p>For growing businesses. For what comes next.</p>
+            <p className="hidden lg:block">FOLLOW THE THREAD ↓</p>
+          </div>
+        </Section>
+      </HeroIntro>
 
       {/* Promise strip */}
       <div className="border-b border-line px-6 py-8 md:px-10 lg:px-20">
@@ -78,7 +82,7 @@ export default function HomePage() {
             Three focused ways to move your business forward. Clear deliverables, from the first conversation.
           </p>
         </div>
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div data-reveal-stagger className="grid gap-5 lg:grid-cols-3">
           {services.map((service) => (
             <ServiceCard key={service.slug} service={service} />
           ))}
@@ -96,7 +100,7 @@ export default function HomePage() {
             View all work
           </Button>
         </div>
-        <div className="grid gap-10 lg:grid-cols-3 lg:gap-6">
+        <div data-reveal-stagger className="grid gap-10 lg:grid-cols-3 lg:gap-6">
           {featuredProjects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
@@ -109,20 +113,7 @@ export default function HomePage() {
         <h2 id="process-heading" className="text-heading font-semibold text-white">
           A clear path from here to live.
         </h2>
-        <ol className="flex flex-col lg:flex-row lg:gap-7">
-          {steps.map((step, i) => (
-            <li key={step.title} className="flex flex-1 flex-col gap-5 pb-9 lg:pb-0">
-              <div className="flex items-center gap-4">
-                <span className="flex size-11 items-center justify-center rounded-full border border-line-dark text-[14px] text-white">
-                  {i + 1}
-                </span>
-                <span aria-hidden className="h-px flex-1 bg-line-dark" />
-              </div>
-              <h3 className="text-[24px] text-white">{step.title}</h3>
-              <p className="text-[16px] leading-[1.6] text-muted-dark">{step.body}</p>
-            </li>
-          ))}
-        </ol>
+        <ProcessSteps steps={steps} />
       </Section>
 
       <WhyDragline />
@@ -131,7 +122,7 @@ export default function HomePage() {
 
       {/* FAQ */}
       <Section aria-labelledby="faq-heading">
-        <div className="flex flex-col gap-10 lg:flex-row lg:gap-[100px]">
+        <div data-reveal-stagger className="flex flex-col gap-10 lg:flex-row lg:gap-[100px]">
           <div className="flex flex-col gap-6 lg:w-[400px]">
             <Eyebrow>A little clarity</Eyebrow>
             <h2 id="faq-heading" className="text-heading font-semibold text-ink">

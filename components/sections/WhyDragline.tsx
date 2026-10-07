@@ -4,7 +4,7 @@ import Section, { Eyebrow } from "@/components/ui/Section";
 export default function WhyDragline() {
   return (
     <Section aria-labelledby="why-heading">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-[100px]">
+      <div data-reveal-stagger className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-[100px]">
         <div className="flex flex-1 flex-col gap-7">
           <Eyebrow>Why Dragline</Eyebrow>
           <h2 id="why-heading" className="text-heading font-semibold text-ink">

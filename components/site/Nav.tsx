@@ -55,7 +55,9 @@ export default function Nav() {
               />
             </Link>
           ))}
-          <Button href={bookCallHref}>Book a free call</Button>
+          <Button href={bookCallHref} magnetic>
+            Book a free call
+          </Button>
         </div>
 
         <button
