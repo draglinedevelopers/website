@@ -45,9 +45,14 @@ export default function Nav() {
               key={link.href}
               href={link.href}
               aria-current={pathname.startsWith(link.href) ? "page" : undefined}
-              className="flex h-11 items-center text-[15px] text-white transition-colors hover:text-lime aria-[current=page]:text-lime"
+              className="group relative flex h-11 items-center text-[15px] text-white transition-colors hover:text-muted-dark"
             >
               {link.label}
+              {/* Active indicator: 16×2 lime bar under the current page, as in Figma. */}
+              <span
+                aria-hidden
+                className="absolute top-[calc(50%+16px)] left-0 hidden h-[2px] w-4 bg-lime group-aria-[current=page]:block"
+              />
             </Link>
           ))}
           <Button href={bookCallHref}>Book a free call</Button>

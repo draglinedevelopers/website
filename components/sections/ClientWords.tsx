@@ -1,13 +1,17 @@
 import Section, { Eyebrow } from "@/components/ui/Section";
 
-/** Testimonial placeholder. Replace the bracketed text only with a real, approved client quote. */
-export default function ClientWords() {
+type ClientWordsProps = {
+  /** Only pass a real, approved client quote. Without one, the design's placeholder is shown. */
+  testimonial?: { quote: string; attribution: string };
+};
+
+export default function ClientWords({ testimonial }: ClientWordsProps) {
   return (
     <Section tone="mist" gap="gap-7">
-      <Eyebrow>Client words / Placeholder</Eyebrow>
+      <Eyebrow>{testimonial ? "Client words" : "Client words / Placeholder"}</Eyebrow>
       <figure className="flex flex-col gap-7">
-        <blockquote className="text-quote text-black">[Testimonial]</blockquote>
-        <figcaption className="text-[14px] text-muted">[Client attribution]</figcaption>
+        <blockquote className="text-quote text-black">{testimonial?.quote ?? "[Testimonial]"}</blockquote>
+        <figcaption className="text-[14px] text-muted">{testimonial?.attribution ?? "[Client attribution]"}</figcaption>
       </figure>
     </Section>
   );

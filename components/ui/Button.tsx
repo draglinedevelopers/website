@@ -14,12 +14,15 @@ type ButtonProps = {
   children: React.ReactNode;
   variant?: Variant;
   className?: string;
+  /** Opens in a new tab (for off-site links such as WhatsApp). */
+  external?: boolean;
 };
 
-export default function Button({ href, children, variant = "primary", className = "" }: ButtonProps) {
+export default function Button({ href, children, variant = "primary", className = "", external }: ButtonProps) {
   return (
     <Link
       href={href}
+      {...(external && { target: "_blank", rel: "noopener noreferrer" })}
       className={`group inline-flex min-h-[52px] items-center justify-center gap-5 border px-[22px] py-[14px] text-[15px] font-medium whitespace-nowrap transition-colors duration-200 ${styles[variant]} ${className}`}
     >
       {children}

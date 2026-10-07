@@ -1,33 +1,38 @@
-# Dragline Developers Website (Next.js 14 + TS + Tailwind)
+# Dragline Developers website
 
-> Starter scaffold with blog (MDX via gray-matter), accessible UI, and no fake data.
+Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · TypeScript. Built from the Dragline Figma design.
 
-## Quickstart
-1. Ensure Node 18+ and pnpm or npm.
-2. Install deps: `pnpm install` (or `npm i`).
-3. Dev server: `pnpm dev` then open http://localhost:3000
-4. Edit content in `/content`, copy in `/lib/metadata.ts`, styles in `/app/globals.css`.
+## Run it
 
-## Deploy (Vercel)
-- Connect repo to Vercel → framework auto-detected (Next.js).
-- Environment variables:
-  - `RESEND_API_KEY` (Production + Preview) for contact form emails; set in Vercel → Project → Settings → Environment Variables.
-  - `CONTACT_RECIPIENTS` comma-separated list of recipients (e.g., `draglinedevelopers@gmail.com,hello@draglinedevelopers.com`).
-- Build settings: defaults ok (`next build`). Vercel uses `npm` (pnpm artifacts removed).
-- After deploy, verify `/contact` → `/thank-you` redirect and check inbox for email.
+```bash
+npm install
+npm run dev
+```
 
-## DNS (Squarespace → Vercel)
-- In Squarespace DNS, add the A/AAAA/CNAME records Vercel provides for your domain.
-- Wait for propagation, then verify domain in Vercel.
+Open http://localhost:3000. `npm run build` checks and builds the production site.
+
+## Editing content (no page code needed)
+
+| What | Where |
+| --- | --- |
+| Work / case studies | `data/projects.ts` (instructions at the top of the file) |
+| Services, prices, scopes | `data/services.ts` |
+| FAQs (Home) | `data/faqs.ts` |
+| Team (About) | `data/team.ts` |
+| Email, phone, socials, WhatsApp | `lib/site.ts` |
+| **Tally form (Contact)** | `lib/site.ts` → `tallyFormId` |
+
+Text in `[square brackets]` is placeholder copy from the design. Replace it only with real, verified content.
+Project images go in `public/work/<slug>/`, team photos in `public/team/`.
 
 ## Structure
-- `app/` routes (App Router)
-- `components/` shared UI
-- `content/` MDX posts (parsed with gray-matter)
-- `lib/` site metadata and utils
-- `public/` static assets
-- Tailwind & PostCSS configured
 
-## Notes
-- MDX is displayed as preformatted content in this minimal starter. If you want full MDX rendering, we can wire `next-mdx-remote` with a proper MDX component mapping.
-- Replace placeholder policy texts and contact details with your real info.
+- `app/` pages: Home, Work (+ `/work/[slug]` case studies), Services, About, Contact
+- `components/` shared UI (nav, footer, sections, cards)
+- `data/` editable content
+- `public/figma/` icons and thread-motif assets exported from Figma
+- Design tokens (colours, type sizes) live in `app/globals.css`
+
+## Deploy
+
+Vercel detects Next.js automatically; no environment variables are required.

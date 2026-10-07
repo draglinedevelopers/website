@@ -9,6 +9,12 @@ export const site = {
   phoneHref: "+2349012769900",
   location: "Based in Nigeria. Connected everywhere.",
   website: "www.draglinedevelopers.com",
+  whatsappHref: "https://wa.me/2349012769900",
+  /**
+   * TALLY FORM: paste your Tally form ID here (the part after tally.so/r/ in the share link,
+   * e.g. "wA1bCd"). The Contact page embeds it automatically; while empty, a marked slot is shown.
+   */
+  tallyFormId: "",
   socials: {
     instagram: "https://www.instagram.com/draglinedevelopers",
     linkedin: "https://www.linkedin.com/company/draglinedevelopers",
