@@ -1,4 +1,4 @@
-import Button from "@/components/ui/Button";
+import MagneticButton from "@/components/motion/MagneticButton";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import { bookCallHref } from "@/lib/site";
 
@@ -12,9 +12,9 @@ export default function ClosingInvitation() {
         </h2>
         {/* Wrapper takes the scroll reveal so the button's own transform is free for the magnetic effect. */}
         <div className="lg:shrink-0">
-          <Button href={bookCallHref} magnetic className="w-full lg:w-auto">
+          <MagneticButton href={bookCallHref} className="w-full lg:w-auto">
             Book a free call
-          </Button>
+          </MagneticButton>
         </div>
       </div>
     </Section>

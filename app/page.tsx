@@ -2,11 +2,12 @@ import Image from "next/image";
 import ProjectCard from "@/components/cards/ProjectCard";
 import ServiceCard from "@/components/cards/ServiceCard";
 import FaqList from "@/components/FaqList";
-import HeroIntro from "@/components/motion/HeroIntro";
+import SplitHeading from "@/components/motion/SplitHeading";
 import ProcessSteps from "@/components/motion/ProcessSteps";
 import ClientWords from "@/components/sections/ClientWords";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import WhyDragline from "@/components/sections/WhyDragline";
+import MagneticButton from "@/components/motion/MagneticButton";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import { faqs } from "@/data/faqs";
@@ -27,37 +28,35 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <HeroIntro>
-        <Section tone="dark" reveal={false} aria-labelledby="hero-heading">
-          <div className="flex items-start justify-between text-[12px] text-muted-dark">
-            <p className="font-semibold uppercase">Design &amp; build studio</p>
-            <p className="hidden lg:block">NIGERIA → EVERYWHERE</p>
-          </div>
-          <div className="flex max-w-[1160px] flex-col gap-8">
-            <h1 id="hero-heading" data-intro="headline" className="text-display font-semibold text-white">
-              Connecting businesses <br className="hidden lg:block" />
-              to the bigger web.
-            </h1>
-            <div className="flex max-w-[590px] flex-col gap-8">
-              <p data-intro="fade" className="text-[18px] leading-[1.5] text-muted-dark lg:text-[21px]">
-                We design and build websites and digital products for growing businesses.
-              </p>
-              <div data-intro="fade" className="flex flex-col gap-3 lg:flex-row">
-                <Button href={bookCallHref} magnetic className="w-full lg:w-auto">
-                  Book a free call
-                </Button>
-                <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
-                  See our work
-                </Button>
-              </div>
+      <Section tone="dark" intro aria-labelledby="hero-heading">
+        <div className="flex items-start justify-between text-[12px] text-muted-dark">
+          <p className="font-semibold uppercase">Design &amp; build studio</p>
+          <p className="hidden lg:block">NIGERIA → EVERYWHERE</p>
+        </div>
+        <div className="flex max-w-[1160px] flex-col gap-8">
+          <SplitHeading id="hero-heading" className="text-display font-semibold text-white">
+            Connecting businesses <br className="hidden lg:block" />
+            to the bigger web.
+          </SplitHeading>
+          <div className="flex max-w-[590px] flex-col gap-8">
+            <p data-intro="fade" className="text-[18px] leading-[1.5] text-muted-dark lg:text-[21px]">
+              We design and build websites and digital products for growing businesses.
+            </p>
+            <div data-intro="fade" className="flex flex-col gap-3 lg:flex-row">
+              <MagneticButton href={bookCallHref} className="w-full lg:w-auto">
+                Book a free call
+              </MagneticButton>
+              <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
+                See our work
+              </Button>
             </div>
           </div>
-          <div className="flex items-start justify-between pt-6 text-[12px] text-muted-dark">
-            <p>For growing businesses. For what comes next.</p>
-            <p className="hidden lg:block">FOLLOW THE THREAD ↓</p>
-          </div>
-        </Section>
-      </HeroIntro>
+        </div>
+        <div className="flex items-start justify-between pt-6 text-[12px] text-muted-dark">
+          <p>For growing businesses. For what comes next.</p>
+          <p className="hidden lg:block">FOLLOW THE THREAD ↓</p>
+        </div>
+      </Section>
 
       {/* Promise strip */}
       <div className="border-b border-line px-6 py-8 md:px-10 lg:px-20">

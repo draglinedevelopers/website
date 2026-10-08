@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "@/components/site/Logo";
-import Button from "@/components/ui/Button";
+import MagneticButton from "@/components/motion/MagneticButton";
+import { gsap, MOTION, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { bookCallHref, navLinks } from "@/lib/site";
 
 export default function Nav() {
@@ -19,8 +20,12 @@ export default function Nav() {
     setOpen(false);
   }
 
+  const header = useRef<HTMLElement>(null);
+  const menuOpen = useRef(false);
+
   // Lock page scroll while the menu is open, close on Escape.
   useEffect(() => {
+    menuOpen.current = open;
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.documentElement.style.overflow = "hidden";
@@ -31,8 +36,36 @@ export default function Nav() {
     };
   }, [open]);
 
+  // Hide the nav while scrolling down, bring it back on scroll up. Always shown near the top of the
+  // page and while the mobile menu is open. Reduced motion: the nav simply stays put.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION.motion, () => {
+        const el = header.current!;
+        let hidden = false;
+        const setHidden = (next: boolean) => {
+          if (next === hidden) return;
+          hidden = next;
+          gsap.to(el, { yPercent: next ? -100 : 0, duration: 0.3, ease: "power3.out", overwrite: true });
+        };
+        ScrollTrigger.create({
+          start: 0,
+          end: "max",
+          onUpdate: (self) => {
+            if (self.scroll() < el.offsetHeight || menuOpen.current) setHidden(false);
+            else if (self.direction === 1) setHidden(true);
+            else setHidden(false);
+          },
+        });
+      });
+      return () => mm.revert();
+    },
+    { scope: header },
+  );
+
   return (
-    <header className="relative z-40 bg-ink">
+    <header ref={header} className="sticky top-0 z-40 bg-ink">
       <nav
         aria-label="Main"
         className="mx-auto flex h-20 items-center justify-between px-6 md:px-10 lg:h-[104px] lg:px-20"
@@ -55,9 +88,9 @@ export default function Nav() {
               />
             </Link>
           ))}
-          <Button href={bookCallHref} magnetic>
+          <MagneticButton href={bookCallHref}>
             Book a free call
-          </Button>
+          </MagneticButton>
         </div>
 
         <button
@@ -99,9 +132,9 @@ export default function Nav() {
             </li>
           ))}
         </ul>
-        <Button href={bookCallHref} className="mt-10 w-full">
+        <MagneticButton href={bookCallHref} className="mt-10 w-full">
           Book a free call
-        </Button>
+        </MagneticButton>
       </div>
     </header>
   );

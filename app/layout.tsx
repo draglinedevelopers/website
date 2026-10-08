@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import PageTransition from "@/components/motion/PageTransition";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import ThreadLine from "@/components/motion/ThreadLine";
 import Nav from "@/components/site/Nav";
@@ -45,12 +46,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="font-sans">
         <SmoothScroll />
-        <Nav />
-        {/* The continuous dragline runs from under the nav to the top of the footer. */}
-        <ThreadLine>
-          <main>{children}</main>
-        </ThreadLine>
-        <Footer />
+        <PageTransition>
+          <Nav />
+          {/* The continuous dragline runs from under the nav to the top of the footer. */}
+          <ThreadLine>
+            <main>{children}</main>
+          </ThreadLine>
+          <Footer />
+        </PageTransition>
       </body>
     </html>
   );
