@@ -127,7 +127,9 @@ export default function MobileMenu({ open, onClose, toggle }: MobileMenuProps) {
     if (isReduced() || !tl.current) {
       gsap.set(p, { autoAlpha: 0 });
       gsap.set(lines, { clearProps: "transform,opacity,visibility" });
-      goPending();
+      // Wait two frames so the hidden menu has actually painted before the route changes
+      // (one rAF still runs before that frame's paint).
+      requestAnimationFrame(() => requestAnimationFrame(goPending));
     } else {
       tl.current.timeScale(1.5).reverse();
     }
