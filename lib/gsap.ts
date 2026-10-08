@@ -22,6 +22,10 @@ export const MOTION = {
   small: "(max-width: 799px)",
 };
 
+/** Extra delay for page intros while a page transition panel is still sweeping away. */
+export const transitionDelay = () =>
+  typeof document !== "undefined" && document.documentElement.hasAttribute("data-transitioning") ? 0.3 : 0;
+
 export type MotionConditions = { motion: boolean; small: boolean };
 
 export { gsap, DrawSVGPlugin, Flip, ScrollTrigger, SplitText, useGSAP };

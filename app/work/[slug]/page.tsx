@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Media } from "@/components/cards/ProjectCard";
+import MediaReveal from "@/components/motion/MediaReveal";
+import SplitHeading from "@/components/motion/SplitHeading";
 import ClientWords from "@/components/sections/ClientWords";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
@@ -36,12 +39,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   return (
     <>
-      <Section tone="dark" aria-labelledby="project-heading">
+      <Section tone="dark" intro aria-labelledby="project-heading">
         <Eyebrow tone="dark">Case study / {project.category}</Eyebrow>
-        <h1 id="project-heading" className="text-display font-semibold text-white">
+        <SplitHeading id="project-heading" className="text-display font-semibold text-white">
           {project.title}
-        </h1>
-        <dl className="flex flex-col gap-5 lg:flex-row lg:gap-20">
+        </SplitHeading>
+        <dl data-intro="fade" className="flex flex-col gap-5 lg:flex-row lg:gap-20">
           {meta.map(({ label, value }) => (
             <div key={label} className="flex flex-col gap-2">
               <dt className="text-[12px] text-muted-dark uppercase">{label}</dt>
@@ -49,9 +52,12 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             </div>
           ))}
         </dl>
-        <Media image={project.cover} tone="dark" priority className="h-[280px] lg:h-[580px]" />
+        {/* Clip-path wipe on load, then a gentle parallax (max 60px) as the hero scrolls away. */}
+        <MediaReveal mode="load" parallax={60} className="h-[280px] border border-line-dark lg:h-[580px]">
+          <Media image={project.cover} tone="dark" priority frameless className="h-full" />
+        </MediaReveal>
         {hasPlaceholders(project) && (
-          <p className="text-[13px] leading-[1.5] text-muted-dark">
+          <p data-intro="fade" className="text-[13px] leading-[1.5] text-muted-dark">
             A case study template. Replace the bracketed fields with verified project content.
           </p>
         )}
@@ -94,7 +100,14 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       <Section tone="dark" aria-labelledby="next-heading">
         <Eyebrow tone="dark">Follow the next thread</Eyebrow>
         <h2 id="next-heading" className="text-heading font-semibold text-white">
-          {next.title}
+          {/* Underline draws in from the left on hover. */}
+          <Link href={`/work/${next.slug}`} className="group/next relative inline-block">
+            {next.title}
+            <span
+              aria-hidden
+              className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 bg-lime transition-transform duration-500 ease-out group-hover/next:scale-x-100 group-focus-visible/next:scale-x-100 motion-reduce:transition-none"
+            />
+          </Link>
         </h2>
         <div className="flex flex-col gap-3 lg:flex-row">
           <Button href={`/work/${next.slug}`} className="w-full lg:w-auto">

@@ -24,11 +24,17 @@ type SectionProps = {
   className?: string;
   /** Scroll reveal for this section's content (default on). */
   reveal?: boolean;
+  /**
+   * Page intro: instead of scroll reveals, elements marked data-intro="fade" fade in on load after the
+   * page's <SplitHeading>. Optional delay (seconds) for intros further down the page.
+   */
+  intro?: boolean;
+  introDelay?: number;
   id?: string;
   "aria-labelledby"?: string;
 };
 
-export default function Section({ tone = "light", children, gap = "gap-10", className = "", reveal = true, ...rest }: SectionProps) {
+export default function Section({ tone = "light", children, gap = "gap-10", className = "", reveal = true, intro, introDelay, ...rest }: SectionProps) {
   return (
     <section
       className={`relative overflow-clip px-6 py-16 md:px-10 lg:px-20 lg:py-24 ${backgrounds[tone]} ${className}`}
@@ -49,7 +55,11 @@ export default function Section({ tone = "light", children, gap = "gap-10", clas
           className="invisible absolute inset-0 rounded-full bg-lime opacity-0"
         />
       </span>
-      <Reveal enabled={reveal} className={`mx-auto flex w-full max-w-[1280px] flex-col ${gap}`}>
+      <Reveal
+        mode={intro ? "load" : reveal ? "scroll" : "off"}
+        delay={introDelay}
+        className={`mx-auto flex w-full max-w-[1280px] flex-col ${gap}`}
+      >
         {children}
       </Reveal>
     </section>

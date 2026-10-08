@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Reveal from "@/components/motion/Reveal";
 import Logo from "@/components/site/Logo";
 import { navLinks, site } from "@/lib/site";
 
@@ -14,8 +15,9 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-white px-6 py-12 md:px-10 lg:px-20 lg:py-16">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+      {/* Footer content reveals with a short stagger as it enters the viewport. */}
+      <Reveal stagger={0.08} className="mx-auto flex max-w-[1280px] flex-col gap-10">
+        <div data-reveal-stagger className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col gap-5 lg:w-[380px]">
             <Logo tone="dark" />
             <p className="text-[16px] leading-[1.6] text-muted">{site.tagline}</p>
@@ -77,7 +79,7 @@ export default function Footer() {
           <p>{site.location}</p>
           <p>{site.website}</p>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

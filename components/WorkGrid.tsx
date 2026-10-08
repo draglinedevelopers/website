@@ -49,8 +49,13 @@ export default function WorkGrid({ projects, showPlaceholderNote }: { projects: 
       // Cards placed by Flip should never re-run their scroll reveal afterwards.
       if (!revealsCleared.current) {
         revealsCleared.current = true;
-        ScrollTrigger.getAll().forEach((st) => cards.includes(st.trigger as HTMLElement) && st.kill());
+        // Kills reveals on the cards and the image wipes inside them, then shows everything in its final state.
+        ScrollTrigger.getAll().forEach(
+          (st) => cards.some((c) => st.trigger instanceof Node && c.contains(st.trigger)) && st.kill(),
+        );
         gsap.set(cards, { autoAlpha: 1, y: 0, clearProps: "transform" });
+        gsap.set(grid.current!.querySelectorAll("[data-media-reveal]"), { clearProps: "clipPath" });
+        gsap.set(grid.current!.querySelectorAll("[data-media-reveal] > div"), { clearProps: "transform" });
       }
 
       if (window.matchMedia(MOTION.motion).matches) flipState.current = Flip.getState(cards);

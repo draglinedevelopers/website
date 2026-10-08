@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import SplitHeading from "@/components/motion/SplitHeading";
 import TallyEmbed from "@/components/TallyEmbed";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
@@ -12,20 +13,20 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <Section tone="dark" gap="gap-8" aria-labelledby="contact-heading">
+      <Section tone="dark" gap="gap-8" intro aria-labelledby="contact-heading">
         <Eyebrow tone="dark">Contact / Book a free call</Eyebrow>
-        <h1 id="contact-heading" className="text-display font-semibold text-white">
+        <SplitHeading id="contact-heading" className="text-display font-semibold text-white">
           Let’s find your next thread.
-        </h1>
-        <p className="max-w-[640px] text-[16px] leading-[1.6] text-muted-dark">
+        </SplitHeading>
+        <p data-intro="fade" className="max-w-[640px] text-[16px] leading-[1.6] text-muted-dark">
           Tell us a little about your business and what you have in mind. We’ll use your free call to understand the
           project and explore the right starting point.
         </p>
       </Section>
 
-      <Section aria-labelledby="enquiry-heading">
+      <Section intro introDelay={0.4} aria-labelledby="enquiry-heading">
         <div data-reveal-stagger className="flex flex-col gap-16 lg:flex-row lg:items-start xl:gap-[120px]">
-          <div className="flex min-w-0 flex-1 flex-col gap-7">
+          <div data-intro="fade" className="flex min-w-0 flex-1 flex-col gap-7">
             <h2 id="enquiry-heading" className="text-[28px] text-black lg:text-[34px]">
               A little about your project.
             </h2>
@@ -38,7 +39,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <aside className="flex flex-col gap-7 bg-mist p-6 lg:w-[400px] lg:p-8" aria-labelledby="direct-heading">
+          <aside data-intro="fade" className="flex flex-col gap-7 bg-mist p-6 lg:w-[400px] lg:p-8" aria-labelledby="direct-heading">
             <p className="text-[12px] font-semibold text-muted uppercase">Prefer a direct conversation?</p>
             <h2 id="direct-heading" className="text-[30px] leading-[1.12] text-black">
               Start wherever feels right.

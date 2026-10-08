@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Media } from "@/components/cards/ProjectCard";
+import SplitHeading from "@/components/motion/SplitHeading";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import WhyDragline from "@/components/sections/WhyDragline";
 import Section, { Eyebrow } from "@/components/ui/Section";
@@ -28,12 +29,12 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <Section tone="dark" gap="gap-8" aria-labelledby="about-heading">
+      <Section tone="dark" gap="gap-8" intro aria-labelledby="about-heading">
         <Eyebrow tone="dark">About / Dragline Developers</Eyebrow>
-        <h1 id="about-heading" className="text-display font-semibold text-white">
+        <SplitHeading id="about-heading" className="text-display font-semibold text-white">
           Built on strong connections.
-        </h1>
-        <div className="flex max-w-[650px] flex-col gap-5 text-muted-dark">
+        </SplitHeading>
+        <div data-intro="fade" className="flex max-w-[650px] flex-col gap-5 text-muted-dark">
           <p className="text-[16px] leading-[1.6]">
             We’re a Nigeria-based design and build studio for growing businesses and founders, locally and
             internationally. We bring design and development together to make your next step clearer.
@@ -42,7 +43,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <WhyDragline />
+      <WhyDragline animateWeb />
 
       <Section tone="dark" aria-labelledby="mission-heading">
         <Eyebrow tone="dark">Our mission</Eyebrow>
@@ -79,7 +80,8 @@ export default function AboutPage() {
         <h2 id="values-heading" className="text-heading font-semibold text-ink">
           Good work starts with how.
         </h2>
-        <ol data-reveal-stagger className="grid gap-9 lg:grid-cols-3 lg:gap-10">
+        {/* Values reveal one by one (0.25s apart). */}
+        <ol data-reveal-stagger="0.25" className="grid gap-9 lg:grid-cols-3 lg:gap-10">
           {values.map((value, i) => (
             <li key={value.title} className="flex flex-col gap-5">
               <div className="h-px bg-line" />
