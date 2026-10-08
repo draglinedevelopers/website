@@ -16,15 +16,18 @@ export type ButtonProps = {
   className?: string;
   /** Opens in a new tab (for off-site links such as WhatsApp). */
   external?: boolean;
+  /** Skip the automatic page transition for this link (the caller navigates itself, e.g. the mobile menu). */
+  transitionIgnore?: boolean;
   ref?: React.Ref<HTMLAnchorElement>;
 };
 
-export default function Button({ href, children, variant = "primary", className = "", external, ref }: ButtonProps) {
+export default function Button({ href, children, variant = "primary", className = "", external, transitionIgnore, ref }: ButtonProps) {
   return (
     <Link
       ref={ref}
       href={href}
       {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+      {...(transitionIgnore && { "data-transition-ignore": "" })}
       className={`group inline-flex min-h-[52px] items-center justify-center gap-5 border px-[22px] py-[14px] text-[15px] font-medium whitespace-nowrap transition-colors duration-200 ${styles[variant]} ${className}`}
     >
       {children}

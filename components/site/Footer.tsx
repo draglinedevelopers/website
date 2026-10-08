@@ -1,16 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/motion/Reveal";
 import Logo from "@/components/site/Logo";
+import SocialLinks from "@/components/site/SocialLinks";
 import { navLinks, site } from "@/lib/site";
-
-const socials = [
-  { label: "Instagram", href: site.socials.instagram, icon: "/figma/instagram.svg", framed: false },
-  { label: "LinkedIn", href: site.socials.linkedin, icon: "/figma/linkedin.svg", framed: false },
-  // The X and TikTok assets already include their 44px frame.
-  { label: "X", href: site.socials.x, icon: "/figma/x-link.svg", framed: true },
-  { label: "TikTok", href: site.socials.tiktok, icon: "/figma/tiktok-link.svg", framed: true },
-];
 
 export default function Footer() {
   return (
@@ -40,36 +32,7 @@ export default function Footer() {
             <a href={`tel:${site.phoneHref}`} className="text-muted transition-colors hover:text-ink">
               {site.phone}
             </a>
-            <ul className="flex gap-2">
-              {socials.map(({ label, href, icon, framed }) => {
-                const content = framed ? (
-                  <Image src={icon} alt="" width={44} height={44} unoptimized />
-                ) : (
-                  <span className="flex size-11 items-center justify-center border border-line">
-                    <Image src={icon} alt="" width={19} height={19} unoptimized />
-                  </span>
-                );
-                return (
-                  <li key={label}>
-                    {href ? (
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={label}
-                        className="block transition-opacity hover:opacity-60"
-                      >
-                        {content}
-                      </a>
-                    ) : (
-                      <span aria-label={`${label} (coming soon)`} role="img" className="block">
-                        {content}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+            <SocialLinks />
           </div>
         </div>
 
