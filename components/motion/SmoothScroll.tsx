@@ -3,6 +3,7 @@
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 import { gsap, MOTION, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { setLenis } from "@/lib/lenis";
 
 /**
  * Lenis smooth scrolling, driven by GSAP's ticker so ScrollTrigger and Lenis share one frame loop.
@@ -21,6 +22,7 @@ export default function SmoothScroll() {
         stopInertiaOnNavigate: true, // no leftover momentum after a route change
       });
 
+      setLenis(lenis);
       lenis.on("scroll", ScrollTrigger.update);
       const raf = (time: number) => lenis.raf(time * 1000);
       gsap.ticker.add(raf);
@@ -29,6 +31,7 @@ export default function SmoothScroll() {
       return () => {
         gsap.ticker.remove(raf);
         gsap.ticker.lagSmoothing(500, 33);
+        setLenis(null);
         lenis.destroy();
       };
     });
