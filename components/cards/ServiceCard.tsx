@@ -1,5 +1,7 @@
-import Button from "@/components/ui/Button";
+import MagneticButton from "@/components/motion/MagneticButton";
 import type { Service } from "@/data/services";
+import { formatPrice } from "@/lib/currency";
+import { bookCallHref } from "@/lib/site";
 
 export default function ServiceCard({ service }: { service: Service }) {
   return (
@@ -19,10 +21,10 @@ export default function ServiceCard({ service }: { service: Service }) {
       </ul>
       <div className="mt-auto flex flex-col gap-6">
         <div className="h-px bg-line" />
-        <p className="text-[16px] text-black">Starting from {service.startingPrice}</p>
-        <Button href={`/services#${service.slug}`} variant="secondary-light" className="w-full">
-          Learn more
-        </Button>
+        <p className="text-[16px] text-black">Starting from {formatPrice(service.startingPrice)}</p>
+        <MagneticButton href={bookCallHref} variant="secondary-light" className="w-full">
+          Book a free call
+        </MagneticButton>
       </div>
     </article>
   );

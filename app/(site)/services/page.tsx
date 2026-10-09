@@ -5,6 +5,7 @@ import SplitHeading from "@/components/motion/SplitHeading";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import { services, type Service } from "@/data/services";
+import { formatPrice } from "@/lib/currency";
 import { bookCallHref } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -57,7 +58,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
           </h2>
           <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.description}</p>
           <div className={`h-px ${t.divider}`} />
-          <p className={`text-[21px] ${t.heading}`}>Starting from {service.startingPrice}</p>
+          <p className={`text-[21px] ${t.heading}`}>Starting from {formatPrice(service.startingPrice)}</p>
           <MagneticButton href={bookCallHref} className="w-full lg:w-auto lg:self-start">
             Book a free call
           </MagneticButton>
@@ -81,6 +82,14 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
                 <p className={`text-[12px] font-semibold uppercase ${t.body}`}>Optional upgrade</p>
                 <h3 className={`text-[23px] ${t.heading}`}>{service.upgrade.title}</h3>
                 <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.upgrade.description}</p>
+                <p className={`mt-3 text-[18px] ${t.heading}`}>Starting from {formatPrice(service.upgrade.startingPrice)}</p>
+                <MagneticButton
+                  href={bookCallHref}
+                  variant={dark ? "secondary-dark" : "secondary-light"}
+                  className="mt-2 w-full lg:w-auto lg:self-start"
+                >
+                  Book a free call
+                </MagneticButton>
               </div>
             </Reveal>
           )}

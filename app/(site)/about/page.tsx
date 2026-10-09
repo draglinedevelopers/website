@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Media } from "@/components/cards/ProjectCard";
 import SplitHeading from "@/components/motion/SplitHeading";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import WhyDragline from "@/components/sections/WhyDragline";
@@ -57,19 +56,17 @@ export default function AboutPage() {
         <h2 id="team-heading" className="text-heading font-semibold text-ink">
           Different skills. One thread.
         </h2>
-        <ul data-reveal-stagger className="grid gap-9 lg:grid-cols-3 lg:gap-6">
-          {team.map((member) => (
-            <li key={member.role} className="flex flex-col gap-5">
-              <Media
-                image={member.photo}
-                label="[Photo]"
-                sizes="(min-width: 1024px) 33vw, 100vw"
-                className="h-[310px] lg:h-[360px]"
-              />
-              <div className="flex flex-col gap-1">
+        {/* Role cards, styled like the service cards; they stagger in with the section reveal. */}
+        <ul data-reveal-stagger className="grid gap-5 lg:grid-cols-3 lg:gap-6">
+          {team.map((member, i) => (
+            <li key={member.role} className="flex flex-col gap-6 border border-line p-7">
+              <p className="text-[12px] text-ink">{String(i + 1).padStart(2, "0")} /</p>
+              <div className="flex flex-col gap-2">
                 {member.name && <p className="text-[16px] text-muted">{member.name}</p>}
-                <p className="text-[24px] text-black">{member.role}</p>
+                <h3 className="text-[24px] leading-[1.2] text-black">{member.role}</h3>
               </div>
+              <div className="h-px bg-line" />
+              <p className="text-[16px] leading-[1.6] text-muted">{member.description}</p>
             </li>
           ))}
         </ul>
