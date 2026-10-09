@@ -1,6 +1,6 @@
 # Managing your Work section (CMS guide)
 
-Your projects are managed at **draglinedevelopers.com/keystatic**. You don't need to touch any code.
+Your projects are managed at **www.draglinedevelopers.com/keystatic**. You don't need to touch any code.
 Each time you press **Save**, the change is stored in the website's GitHub repository, and the live site
 updates by itself about two minutes later.
 
@@ -8,7 +8,7 @@ updates by itself about two minutes later.
 
 ## Logging in
 
-1. Go to **draglinedevelopers.com/keystatic**.
+1. Go to **www.draglinedevelopers.com/keystatic**.
 2. Click **Log in with GitHub** and sign in with your GitHub account.
 3. You'll see **Projects** in the left menu.
 
@@ -76,12 +76,13 @@ you delete something by mistake, the site owner can restore it from the GitHub h
 ## For the site owner (one-time setup)
 
 1. **Connect GitHub.** On your computer, run the site locally (`npm run dev`), open `localhost:3000/keystatic`
-   and follow the on-screen steps to **Create GitHub App** and give it access to this repository. This writes
-   four values to a local `.env` file.
+   and follow the on-screen steps to **Create GitHub App** (Deployed App URL: `https://www.draglinedevelopers.com`)
+   and give it access to this repository. This writes four values to a local `.env` file. To log in locally too,
+   add `KEYSTATIC_ALLOWED_GITHUB_USERS=your-github-username` to that `.env` file.
 2. **Add them to Vercel.** In Vercel → Project → Settings → Environment Variables, add the four values from
    `.env` (`KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`,
    `NEXT_PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`), plus `KEYSTATIC_ALLOWED_GITHUB_USERS` (see step 3). Redeploy.
-   In the GitHub App's settings, make sure `https://draglinedevelopers.com/api/keystatic/github/oauth/callback`
+   In the GitHub App's settings, make sure `https://www.draglinedevelopers.com/api/keystatic/github/oauth/callback`
    is listed as a callback URL.
 3. **Approve people.** A person needs both:
    - **write access** to the GitHub repository (GitHub → repository → Settings → Collaborators), and
