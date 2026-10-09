@@ -3,4 +3,4 @@ Allow: /
 Disallow: /keystatic
 Disallow: /api/
 
-Sitemap: https://draglinedevelopers.com/sitemap.xml
+Sitemap: https://www.draglinedevelopers.com/sitemap.xml

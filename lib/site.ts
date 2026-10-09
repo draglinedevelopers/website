@@ -1,6 +1,7 @@
 export const site = {
   name: "Dragline Developers",
-  url: "https://draglinedevelopers.com",
+  // Canonical address (the bare domain redirects here); used for the sitemap, canonical and share metadata.
+  url: "https://www.draglinedevelopers.com",
   tagline: "Connecting businesses to the bigger web.",
   description:
     "We design and build websites and digital products for growing businesses.",
