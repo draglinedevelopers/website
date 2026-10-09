@@ -1,9 +1,13 @@
 title: 'HerPride: campaign design'
 category: Campaigns
-client: '[Client]'
-service: '[Service]'
-year: '[Year]'
+client: HerPride.io
+service: Graphic Design
+year: '2026'
 result: '[Project result]'
+cover: /work/herpride/cover.jpg
+galleryWide: /work/herpride/galleryWide.jpg
+galleryLeft: /work/herpride/galleryLeft.jpg
+galleryRight: /work/herpride/galleryRight.png
 testimonial: {}
 featured: true
 order: 10
