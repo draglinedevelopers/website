@@ -3,14 +3,16 @@ import SplitHeading from "@/components/motion/SplitHeading";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import WorkGrid from "@/components/WorkGrid";
-import { hasPlaceholders, projects } from "@/data/projects";
+import { hasPlaceholders } from "@/data/projects";
+import { getProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
   description: "Websites, product design and campaigns by Dragline Developers.",
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const projects = await getProjects();
   return (
     <>
       <Section tone="dark" gap="gap-8" intro aria-labelledby="work-heading">

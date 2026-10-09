@@ -7,25 +7,27 @@ import SplitHeading from "@/components/motion/SplitHeading";
 import ClientWords from "@/components/sections/ClientWords";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
-import { getNextProject, getProject, hasPlaceholders, projects } from "@/data/projects";
+import RichText from "@/components/RichText";
+import { hasPlaceholders } from "@/data/projects";
+import { getNextProject, getProject, getProjects } from "@/lib/projects";
 
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProjects()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
-  const project = getProject((await params).slug);
+  const project = await getProject((await params).slug);
   if (!project) return {};
   return { title: project.title, description: project.result };
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]">) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
 
-  const next = getNextProject(slug);
-  const [wide, left, right] = project.gallery ?? [];
+  const next = await getNextProject(slug);
+  const [wide, left, right] = project.gallery;
   const meta = [
     { label: "Client", value: project.client },
     { label: "Service", value: project.service },
@@ -79,7 +81,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                   <span className="text-[13px] text-ink">{String(i + 1).padStart(2, "0")}</span>
                   <span className="text-[26px] text-black">{item.title}</span>
                 </h3>
-                <p className="text-[16px] leading-[1.6] text-muted">{item.body}</p>
+                <RichText value={item.body} />
               </li>
             ))}
           </ol>

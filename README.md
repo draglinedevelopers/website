@@ -15,7 +15,7 @@ Open http://localhost:3000. `npm run build` checks and builds the production sit
 
 | What | Where |
 | --- | --- |
-| Work / case studies | `data/projects.ts` (instructions at the top of the file) |
+| Work / case studies | **CMS at `/keystatic`** — see [CMS-GUIDE.md](CMS-GUIDE.md) (content lives in `content/projects/`) |
 | Services, prices, scopes | `data/services.ts` |
 | FAQs (Home) | `data/faqs.ts` |
 | Team (About) | `data/team.ts` |
@@ -23,7 +23,7 @@ Open http://localhost:3000. `npm run build` checks and builds the production sit
 | **Tally form (Contact)** | `lib/site.ts` → `tallyFormId` |
 
 Text in `[square brackets]` is placeholder copy from the design. Replace it only with real, verified content.
-Project images go in `public/work/<slug>/`, team photos in `public/team/`.
+Project images are uploaded through the CMS (stored in `public/work/<slug>/`); team photos go in `public/team/`.
 
 ## Structure
 
