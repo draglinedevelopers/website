@@ -15,7 +15,8 @@ export type Service = {
   included: string[];
   excluded: string[];
   upgrade?: { title: string; description: string; startingPrice: Price };
-  timeline: { value: string; note: string };
+  /** `value` is left out until a timeline has been confirmed; only the note is shown then. */
+  timeline: { value?: string; note: string };
 };
 
 export const services: Service[] = [
@@ -71,7 +72,7 @@ export const services: Service[] = [
       "Ongoing product management",
       "Additional flows outside the agreed scope",
     ],
-    timeline: { value: "[Timeline]", note: "The schedule is agreed around your core flows and deliverables." },
+    timeline: { note: "The schedule is agreed around your core flows and deliverables." },
   },
   {
     slug: "monthly-care-plan",
@@ -95,7 +96,6 @@ export const services: Service[] = [
       "Hosting and third-party subscription fees",
     ],
     timeline: {
-      value: "[Timeline]",
       note: "Monthly support; response times and update allowance are agreed in your plan.",
     },
   },

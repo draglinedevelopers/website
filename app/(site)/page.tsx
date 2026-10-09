@@ -4,7 +4,6 @@ import ServiceCard from "@/components/cards/ServiceCard";
 import FaqList from "@/components/FaqList";
 import SplitHeading from "@/components/motion/SplitHeading";
 import ProcessSteps from "@/components/motion/ProcessSteps";
-import ClientWords from "@/components/sections/ClientWords";
 import ClosingInvitation from "@/components/sections/ClosingInvitation";
 import WhyDragline from "@/components/sections/WhyDragline";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -89,27 +88,29 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      {/* 02 / Selected work */}
-      <Section tone="mist" aria-labelledby="work-heading">
-        <Eyebrow>02 / Selected work</Eyebrow>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end">
-          <h2 id="work-heading" className="text-heading flex-1 font-semibold text-ink">
-            A few threads we&apos;ve built.
-          </h2>
-          <Button href="/work" variant="secondary-light" className="w-full lg:w-auto">
-            View all work
-          </Button>
-        </div>
-        <div data-reveal-stagger className="grid gap-10 lg:grid-cols-3 lg:gap-6">
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
-      </Section>
+      {/* 02 / Selected work: only shown once at least one finished project is featured. */}
+      {featuredProjects.length > 0 && (
+        <Section tone="mist" aria-labelledby="work-heading">
+          <Eyebrow>02 / Selected work</Eyebrow>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end">
+            <h2 id="work-heading" className="text-heading flex-1 font-semibold text-ink">
+              A few threads we&apos;ve built.
+            </h2>
+            <Button href="/work" variant="secondary-light" className="w-full lg:w-auto">
+              View all work
+            </Button>
+          </div>
+          <div data-reveal-stagger className="grid gap-10 lg:grid-cols-3 lg:gap-6">
+            {featuredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+        </Section>
+      )}
 
-      {/* 03 / How we work */}
+      {/* 03 / How we work (02 while Selected work is hidden) */}
       <Section tone="dark" aria-labelledby="process-heading">
-        <Eyebrow tone="dark">03 / How we work</Eyebrow>
+        <Eyebrow tone="dark">{featuredProjects.length > 0 ? "03" : "02"} / How we work</Eyebrow>
         <h2 id="process-heading" className="text-heading font-semibold text-white">
           A clear path from here to live.
         </h2>
@@ -117,8 +118,6 @@ export default async function HomePage() {
       </Section>
 
       <WhyDragline />
-
-      <ClientWords />
 
       {/* FAQ */}
       <Section aria-labelledby="faq-heading">

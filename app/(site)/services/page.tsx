@@ -96,7 +96,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
 
           <div className={`h-px ${t.divider}`} />
           <div className="flex flex-col gap-[10px]">
-            <p className={`text-[22px] ${t.heading}`}>Timeline / {service.timeline.value}</p>
+            <p className={`text-[22px] ${t.heading}`}>Timeline{service.timeline.value && ` / ${service.timeline.value}`}</p>
             <p className={`text-[16px] leading-[1.6] ${t.body}`}>{service.timeline.note}</p>
           </div>
         </div>

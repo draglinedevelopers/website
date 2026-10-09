@@ -28,19 +28,21 @@ owner to approve you (see *For the site owner* below).
      title on project cards.
    - **Cover image** – the main picture, shown on cards and at the top of the case study. Landscape images
      work best. Add a short **description** of the image for people who can’t see it.
-   - **Gallery images** – up to three: one wide image, then a left and a right image. Each has its own
-     description box.
+   - **Gallery images** (optional) – up to three: one wide image, then a left and a right image. Each has its
+     own description box. Empty slots are simply not shown.
    - **The challenge**, **What we did**, **The outcome** – the story of the project. You can use **bold**,
      *italic*, links and bullet or numbered lists.
-   - **Testimonial** (optional) – only add a real quote the client has approved. Leave it empty to keep the
-     placeholder.
+   - **Testimonial** (optional) – only add a real quote the client has approved. Leave it empty and the quote
+     section is not shown.
    - **Featured on Home** – tick this to show the project in “Selected work” on the home page. The home page
      shows the first three ticked projects.
    - **Display order** – lower numbers come first. Existing projects use 10, 20, 30… so you can slot a new
      one in between (for example 15).
 3. Click **Save**. The project goes live in about two minutes.
 
-Anything you leave out shows the design’s grey placeholder, so the page never looks broken.
+A project only appears on the site once it is complete: it needs a **cover image** and no text left in
+**[square brackets]**. Until then it stays hidden everywhere (Work, Home and its own page), so you can save
+drafts safely.
 
 ---
 
@@ -67,7 +69,7 @@ you delete something by mistake, the site owner can restore it from the GitHub h
 ## Good to know
 
 - Text in **[square brackets]**, such as `[Project result]`, is placeholder text from the design. Replace it
-  with real, verified content.
+  with real, verified content; the project stays hidden until every bracket is gone.
 - Changes are not instant: allow about two minutes after saving, then refresh the page.
 - The CMS only manages the Work section. Other pages are edited in code.
 

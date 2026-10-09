@@ -8,11 +8,11 @@ import ClientWords from "@/components/sections/ClientWords";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import RichText from "@/components/RichText";
-import { hasPlaceholders } from "@/data/projects";
-import { getNextProject, getProject, getProjects } from "@/lib/projects";
+import { getAllProjectSlugs, getNextProject, getProject } from "@/lib/projects";
 
+// Cache Components needs at least one param, so every slug is listed; unfinished ones render 404.
 export async function generateStaticParams() {
-  return (await getProjects()).map((p) => ({ slug: p.slug }));
+  return (await getAllProjectSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
@@ -58,11 +58,6 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <MediaReveal mode="load" parallax={60} className="h-[280px] border border-line-dark lg:h-[580px]">
           <Media image={project.cover} tone="dark" priority frameless className="h-full" />
         </MediaReveal>
-        {hasPlaceholders(project) && (
-          <p data-intro="fade" className="text-[13px] leading-[1.5] text-muted-dark">
-            A case study template. Replace the bracketed fields with verified project content.
-          </p>
-        )}
       </Section>
 
       <Section aria-labelledby="narrative-heading">
@@ -88,14 +83,23 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </div>
       </Section>
 
-      <Section tone="mist" aria-label="Project gallery">
-        <Eyebrow>A closer look</Eyebrow>
-        <Media image={wide} className="h-[260px] lg:h-[520px]" />
-        <div data-reveal-stagger className="grid gap-6 lg:grid-cols-2">
-          <Media image={left} sizes="(min-width: 1024px) 50vw, 100vw" className="h-[260px] lg:h-[380px]" />
-          <Media image={right} sizes="(min-width: 1024px) 50vw, 100vw" className="h-[260px] lg:h-[380px]" />
-        </div>
-      </Section>
+      {/* Only images that have been added are shown; the section disappears when there are none. */}
+      {(wide || left || right) && (
+        <Section tone="mist" aria-label="Project gallery">
+          <Eyebrow>A closer look</Eyebrow>
+          {wide && <Media image={wide} className="h-[260px] lg:h-[520px]" />}
+          {(left || right) && (
+            <div data-reveal-stagger className="grid gap-6 lg:grid-cols-2">
+              {[left, right].map(
+                (image) =>
+                  image && (
+                    <Media key={image.src} image={image} sizes="(min-width: 1024px) 50vw, 100vw" className="h-[260px] lg:h-[380px]" />
+                  ),
+              )}
+            </div>
+          )}
+        </Section>
+      )}
 
       <ClientWords testimonial={project.testimonial} />
 

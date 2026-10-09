@@ -7,7 +7,7 @@ import { Flip, gsap, MOTION, ScrollTrigger, useGSAP } from "@/lib/gsap";
 
 type Filter = WorkCategory | "All";
 
-export default function WorkGrid({ projects, showPlaceholderNote }: { projects: Project[]; showPlaceholderNote: boolean }) {
+export default function WorkGrid({ projects }: { projects: Project[] }) {
   const [filter, setFilter] = useState<Filter>("All");
   const grid = useRef<HTMLDivElement>(null);
   const flipState = useRef<Flip.FlipState | null>(null);
@@ -77,12 +77,6 @@ export default function WorkGrid({ projects, showPlaceholderNote }: { projects: 
           </button>
         ))}
       </div>
-
-      {showPlaceholderNote && (
-        <p className="text-[13px] leading-[1.5] text-muted">
-          Project imagery and results are labelled placeholders where details have not yet been provided.
-        </p>
-      )}
 
       {/* All cards stay mounted so Flip can animate them in and out; filtered-out cards are `hidden`. */}
       <div ref={grid} data-reveal-stagger className="grid gap-12 lg:grid-cols-2 lg:gap-x-10">
