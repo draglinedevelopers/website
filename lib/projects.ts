@@ -9,7 +9,7 @@ import { createReader } from "@keystatic/core/reader";
 import Markdoc, { type Node } from "@markdoc/markdoc";
 import { cacheLife } from "next/cache";
 import keystaticConfig from "../keystatic.config";
-import type { Project, ProjectImage, RichText, WorkCategory } from "@/data/projects";
+import { hasPlaceholders, type Project, type ProjectImage, type RichText, type WorkCategory } from "@/data/projects";
 
 const plainText = (node: Node): string =>
   (node.type === "text" ? String(node.attributes.content ?? "") : "") + node.children.map(plainText).join("");
@@ -57,21 +57,28 @@ async function loadProjects(): Promise<Project[]> {
     .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 }
 
-/** All projects, in display order. */
-export const getProjects = () => loadProjects();
+/**
+ * Published projects only, in display order. A project with any design placeholder left (bracketed
+ * text or no cover image) stays hidden everywhere on the site until it is completed in the CMS.
+ */
+export const getProjects = async () => (await loadProjects()).filter((p) => !hasPlaceholders(p));
 
-/** The first three projects marked "Featured on Home", in display order. */
+/** Every project slug, finished or not, for prerendering (unfinished ones render the 404 page). */
+export const getAllProjectSlugs = async () => (await loadProjects()).map((p) => p.slug);
+
+/** The first three published projects marked "Featured on Home", in display order. */
 export async function getFeaturedProjects() {
-  return (await loadProjects()).filter((p) => p.featured).slice(0, 3);
+  return (await getProjects()).filter((p) => p.featured).slice(0, 3);
 }
 
+/** A published project, or undefined (unfinished projects are not shown). */
 export async function getProject(slug: string) {
-  return (await loadProjects()).find((p) => p.slug === slug);
+  return (await getProjects()).find((p) => p.slug === slug);
 }
 
-/** The project after `slug` in display order (wraps around), for "Follow the next thread". */
+/** The published project after `slug` in display order (wraps around), for "Follow the next thread". */
 export async function getNextProject(slug: string) {
-  const projects = await loadProjects();
+  const projects = await getProjects();
   const i = projects.findIndex((p) => p.slug === slug);
   return projects[(i + 1) % projects.length];
 }

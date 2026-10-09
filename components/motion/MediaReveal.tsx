@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, MOTION, ScrollTrigger, transitionDelay, useGSAP, type MotionConditions } from "@/lib/gsap";
+import { gsap, MOTION, onceInView, transitionDelay, useGSAP, type MotionConditions } from "@/lib/gsap";
 
 type MediaRevealProps = {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ type MediaRevealProps = {
   className?: string;
   /** "scroll": wipe in when it enters the viewport. "load": wipe in on page load (pre-hidden, no flash). */
   mode?: "scroll" | "load";
-  /** Max px the frame drifts down (scrubbed) while its section scrolls away. Used on case study heroes. */
+  /** Max px the frame drifts down (scrubbed) while its section scrolls away. Used on case study heroes. Desktop only. */
   parallax?: number;
 };
 
@@ -46,14 +46,21 @@ export default function MediaReveal({ children, className = "", mode = "scroll",
         } else if (el.getBoundingClientRect().top > window.innerHeight * 0.85) {
           gsap.set(el, { clipPath: HIDDEN });
           gsap.set(inner, { scale: 1.1 });
-          ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => wipe() });
+          onceInView(el, "top 85%", () => wipe());
         }
 
-        if (parallax) {
+        // Phones skip the parallax: it would move a large image on every scroll frame.
+        if (parallax && !small) {
           gsap.to(el, {
-            y: small ? parallax / 2 : parallax,
+            y: parallax,
             ease: "none",
-            scrollTrigger: { trigger: el.closest("section") ?? el, start: "top top", end: "bottom top", scrub: true },
+            scrollTrigger: {
+              trigger: el.closest("section") ?? el,
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.5,
+              onToggle: (self) => gsap.set(el, { willChange: self.isActive ? "transform" : "auto" }),
+            },
           });
         }
       });

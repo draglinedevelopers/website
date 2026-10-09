@@ -90,7 +90,7 @@ export default config({
             quote: fields.text({ label: "Quote", multiline: true, description: "Only add a real, approved client quote." }),
             attribution: fields.text({ label: "Attribution", description: "e.g. Jane Doe, Founder of Acme" }),
           },
-          { label: "Testimonial (optional)", description: "Leave empty to show the placeholder." },
+          { label: "Testimonial (optional)", description: "Leave empty to hide the quote section." },
         ),
 
         featured: fields.checkbox({

@@ -34,9 +34,11 @@ export default function ContactPage() {
             {/* ▶ TALLY FORM EMBED: set `tallyFormId` in lib/site.ts */}
             <TallyEmbed formId={site.tallyFormId} title="Book a free call" />
 
-            <p className="text-[13px] leading-[1.5] text-muted">
-              We’ll only use these details to respond to your enquiry and arrange your call.
-            </p>
+            {site.tallyFormId && (
+              <p className="text-[13px] leading-[1.5] text-muted">
+                We’ll only use these details to respond to your enquiry and arrange your call.
+              </p>
+            )}
           </div>
 
           <aside data-intro="fade" className="flex flex-col gap-7 bg-mist p-6 lg:w-[400px] lg:p-8" aria-labelledby="direct-heading">

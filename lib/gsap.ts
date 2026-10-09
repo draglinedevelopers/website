@@ -26,6 +26,38 @@ export const MOTION = {
 export const transitionDelay = () =>
   typeof document !== "undefined" && document.documentElement.hasAttribute("data-transitioning") ? 0.3 : 0;
 
+/**
+ * Runs `play` once when `trigger` reaches `start`, then kills the trigger so nothing is left watching
+ * the scroll. `clamp()` keeps the start within the page, so elements too close to the bottom to ever
+ * reach `start` still play when the visitor reaches the end.
+ */
+export function onceInView(trigger: Element, start: string, play: () => void) {
+  return ScrollTrigger.create({
+    trigger,
+    start: `clamp(${start})`,
+    onEnter: (self) => {
+      self.kill();
+      play();
+    },
+  });
+}
+
+/**
+ * Route-change cleanup. Next keeps recently visited pages mounted but hidden (display:none), so a
+ * trigger whose element is no longer rendered belongs to a page the visitor has left: kill it and its
+ * animation, then re-measure the remaining triggers once for the new page.
+ */
+export function resetScrollTriggersForRoute() {
+  ScrollTrigger.getAll().forEach((st) => {
+    const el = st.trigger;
+    if (el instanceof Element && el !== document.documentElement && (!el.isConnected || el.getClientRects().length === 0)) {
+      st.animation?.kill();
+      st.kill();
+    }
+  });
+  ScrollTrigger.refresh();
+}
+
 export type MotionConditions = { motion: boolean; small: boolean };
 
 export { gsap, DrawSVGPlugin, Flip, ScrollTrigger, SplitText, useGSAP };
