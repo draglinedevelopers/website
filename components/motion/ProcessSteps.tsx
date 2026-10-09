@@ -1,14 +1,15 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, MOTION, useGSAP, type MotionConditions } from "@/lib/gsap";
+import { gsap, MOTION, onceInView, useGSAP, type MotionConditions } from "@/lib/gsap";
 
 type Step = { title: string; body: string };
 
 /**
- * "How we work" steps. With motion allowed, steps start dimmed and light up one by one, scrubbed
- * to scroll: a lime ring fades in over the step node, the step text comes to full strength and a
- * lime thread grows along the connector. Without JS / with reduced motion they render as in Figma.
+ * "How we work" steps. With motion allowed, steps start dimmed and light up one by one, once, as
+ * they come into view: a lime ring fades in over the step node, the step text comes to full strength
+ * and a lime thread grows along the connector. Without JS / with reduced motion they render as in Figma.
+ * Each trigger fires once and is then killed, so nothing runs while the page scrolls.
  */
 export default function ProcessSteps({ steps }: { steps: Step[] }) {
   const root = useRef<HTMLOListElement>(null);
@@ -35,24 +36,19 @@ export default function ProcessSteps({ steps }: { steps: Step[] }) {
             .to(part(el, "ring"), { opacity: 1, duration: 0.3 })
             .to(part(el, "node"), { scale: 1.08, duration: 0.3 }, "<")
             .to(el.querySelectorAll(".step-text"), { autoAlpha: 1, duration: 0.3 }, "<")
-            .to(part(el, "thread"), { scaleX: 1, duration: 0.7 });
+            .to(part(el, "thread"), { scaleX: 1, duration: 0.4 }, "-=0.1");
 
         if (small) {
-          // Stacked: each step lights as its node crosses mid-screen, where the thread tip is.
+          // Stacked: each step lights as its node reaches mid-screen, where the thread tip is.
           items.forEach((el) => {
-            const tl = gsap.timeline({
-              defaults: { ease: "none" },
-              scrollTrigger: { trigger: part(el, "node")[0], start: "center 60%", end: "center 40%", scrub: true },
-            });
-            light(tl, el);
+            const tl = light(gsap.timeline({ paused: true, defaults: { ease: "power2.out" } }), el);
+            onceInView(part(el, "node")[0], "center 55%", () => tl.play());
           });
         } else {
-          // One row: light the steps left to right while the row passes the thread tip.
-          const tl = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: root.current, start: "top 72%", end: "+=340", scrub: true },
-          });
+          // One row: light the steps left to right once the row reaches the thread tip.
+          const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.out" } });
           items.forEach((el) => light(tl, el));
+          onceInView(root.current!, "top 65%", () => tl.play());
         }
       });
 

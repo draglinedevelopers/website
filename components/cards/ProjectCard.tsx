@@ -57,7 +57,15 @@ export function Media({ image, className, sizes = "100vw", label, tone = "light"
   if (!image) return <ImagePlaceholder label={label} tone={tone} frameless={frameless} className={extra} />;
   return (
     <div className={`relative overflow-hidden ${frameless ? "" : "border"} ${tone === "dark" ? "border-line-dark" : "border-line"} ${extra}`}>
-      <Image src={image.src} alt={image.alt} fill sizes={sizes} priority={priority} className="object-cover" />
+      <Image
+        src={image.src}
+        alt={image.alt}
+        fill
+        sizes={sizes}
+        // Above-the-fold hero: load straight away at high priority; everything else stays lazy.
+        {...(priority && { loading: "eager" as const, fetchPriority: "high" as const })}
+        className="object-cover"
+      />
     </div>
   );
 }

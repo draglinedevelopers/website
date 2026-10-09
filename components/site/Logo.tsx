@@ -12,7 +12,6 @@ export default function Logo({ tone }: LogoProps) {
         alt=""
         width={21}
         height={32}
-        priority={tone === "light"}
       />
       <span
         className={`text-[19px] leading-[0.98] font-semibold ${tone === "light" ? "text-white" : "text-ink"}`}

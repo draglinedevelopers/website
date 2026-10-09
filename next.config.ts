@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
     ];
   },
   partialPrefetching: true,
+  // Serve AVIF where the browser supports it, WebP otherwise.
+  images: { formats: ["image/avif", "image/webp"] },
   turbopack: {
     rules: {
       "*.css": {

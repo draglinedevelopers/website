@@ -8,13 +8,13 @@ import { setLenis } from "@/lib/lenis";
 /**
  * Lenis smooth scrolling, driven by GSAP's ticker so ScrollTrigger and Lenis share one frame loop.
  * Only created when motion is allowed: reduced-motion users keep native scrolling with no Lenis at all.
- * Touch devices keep native scrolling (Lenis smooths wheel input only by default).
+ * Below 800px there is no Lenis at all: phones scroll natively (Lenis would only add per-frame work there).
  */
 export default function SmoothScroll() {
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
-    mm.add(MOTION.motion, () => {
+    mm.add(`${MOTION.motion} and (min-width: 800px)`, () => {
       const lenis = new Lenis({
         autoRaf: false,
         anchors: true, // same-page #links scroll smoothly

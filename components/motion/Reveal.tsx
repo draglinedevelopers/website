@@ -66,9 +66,11 @@ export default function Reveal({ children, className, as: Tag = "div", mode = "s
         const offset = from === "right" ? { x: small ? 30 : 60 } : { y: small ? 16 : 30 };
         gsap.set(pending, { autoAlpha: 0, ...offset });
         ScrollTrigger.batch(pending, {
-          start: "top 85%",
-          once: true,
-          onEnter: (batch) => {
+          // clamp(): items too close to the bottom to reach 85% still reveal at the end of the page.
+          start: "clamp(top 85%)",
+          onEnter: (batch, triggers) => {
+            // Each item reveals once; drop its trigger straight away.
+            triggers.forEach((st) => st.kill());
             const custom = parseFloat((batch[0] as HTMLElement).parentElement?.getAttribute("data-reveal-stagger") || "");
             gsap.to(batch, {
               autoAlpha: 1,

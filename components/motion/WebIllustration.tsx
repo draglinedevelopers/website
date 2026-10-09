@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { gsap, MOTION, useGSAP } from "@/lib/gsap";
+import { gsap, MOTION, onceInView, useGSAP } from "@/lib/gsap";
 
 /** Path data of public/figma/connected-web.svg (242.308 × 290), inlined so each cell can be drawn. */
 const WEB_D =
@@ -31,7 +31,7 @@ const CELLS = WEB_D.split("Z")
 
 /**
  * The "Why Dragline" illustration: anchoring thread + connected web + lime connection node.
- * With `animate`, scrubbed to scroll: the single thread draws first, then branches into the web
+ * With `animate`, plays once as it comes into view: the single thread draws first, then branches into the web
  * cell by cell, then the node lights. Static (identical to the Figma asset) otherwise.
  */
 export default function WebIllustration({ animate = false }: { animate?: boolean }) {
@@ -42,14 +42,12 @@ export default function WebIllustration({ animate = false }: { animate?: boolean
       if (!animate) return;
       const mm = gsap.matchMedia();
       mm.add(MOTION.motion, () => {
-        gsap
-          .timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: { trigger: root.current, start: "top 80%", end: "bottom 35%", scrub: true },
-          })
-          .fromTo("[data-web-thread]", { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 1 })
-          .fromTo("[data-web-cell]", { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.6, stagger: 0.07 })
+        const tl = gsap
+          .timeline({ paused: true, defaults: { ease: "power2.inOut" } })
+          .fromTo("[data-web-thread]", { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.5 })
+          .fromTo("[data-web-cell]", { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.5, stagger: 0.04 })
           .fromTo("[data-web-node]", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 });
+        onceInView(root.current!, "top 70%", () => tl.play());
       });
       return () => mm.revert();
     },
