@@ -11,7 +11,7 @@ import MagneticButton from "@/components/motion/MagneticButton";
 import Button from "@/components/ui/Button";
 import Section, { Eyebrow } from "@/components/ui/Section";
 import { faqs } from "@/data/faqs";
-import { featuredProjects } from "@/data/projects";
+import { getFeaturedProjects } from "@/lib/projects";
 import { services } from "@/data/services";
 import { bookCallHref } from "@/lib/site";
 
@@ -24,7 +24,8 @@ const steps = [
   { title: "Launch and handover", body: "We launch together and show you how to manage what we’ve built." },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredProjects = await getFeaturedProjects();
   return (
     <>
       {/* Hero */}
