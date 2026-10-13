@@ -22,8 +22,9 @@ export default function ServiceCard({ service }: { service: Service }) {
       <div className="mt-auto flex flex-col gap-6">
         <div className="h-px bg-line" />
         <p className="text-[16px] text-black">Starting from {formatPrice(service.startingPrice)}</p>
-        <MagneticButton href={bookCallHref} variant="secondary-light" className="w-full">
-          Book a free call
+        {/* Three narrow cards between 1024 and 1279px: tighten the button slightly so the label stays on one line. */}
+        <MagneticButton href={bookCallHref} variant="secondary-light" className="w-full lg:max-xl:gap-2.5 lg:max-xl:px-3 lg:max-xl:text-[14px]">
+          Book a free consultation
         </MagneticButton>
       </div>
     </article>

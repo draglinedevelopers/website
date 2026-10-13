@@ -27,7 +27,7 @@ export default function ServicesPage() {
             we’ll agree exactly what’s involved.
           </p>
           <p className="text-[13px] leading-[1.5]">
-            The scopes below are proposed starting points, refined together on your free call.
+            The scopes below are proposed starting points, refined together on your free consultation.
           </p>
         </div>
       </Section>
@@ -60,7 +60,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
           <div className={`h-px ${t.divider}`} />
           <p className={`text-[21px] ${t.heading}`}>Starting from {formatPrice(service.startingPrice)}</p>
           <MagneticButton href={bookCallHref} className="w-full lg:w-auto lg:self-start">
-            Book a free call
+            Book a free consultation
           </MagneticButton>
         </div>
 
@@ -88,7 +88,7 @@ function ServiceOffer({ service, dark }: { service: Service; dark: boolean }) {
                   variant={dark ? "secondary-dark" : "secondary-light"}
                   className="mt-2 w-full lg:w-auto lg:self-start"
                 >
-                  Book a free call
+                  Book a free consultation
                 </MagneticButton>
               </div>
             </Reveal>

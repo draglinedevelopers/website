@@ -99,7 +99,7 @@ export default function Nav() {
               </Link>
             ))}
             <MagneticButton href={bookCallHref}>
-              Book a free call
+              Book a free consultation
             </MagneticButton>
           </div>
 
