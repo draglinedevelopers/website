@@ -46,7 +46,7 @@ export function useMagnetic(ref: React.RefObject<HTMLElement | null>) {
   );
 }
 
-/** <Button> with the desktop-only magnetic hover. Used for every "Book a free call". */
+/** <Button> with the desktop-only magnetic hover. Used for every "Book a free consultation". */
 export default function MagneticButton(props: Omit<ButtonProps, "ref">) {
   const ref = useRef<HTMLAnchorElement>(null);
   useMagnetic(ref);

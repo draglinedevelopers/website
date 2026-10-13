@@ -7,19 +7,19 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Book a free call. Tell us about your business and what you have in mind.",
+  description: "Book a free consultation. Tell us about your business and what you have in mind.",
 };
 
 export default function ContactPage() {
   return (
     <>
       <Section tone="dark" gap="gap-8" intro aria-labelledby="contact-heading">
-        <Eyebrow tone="dark">Contact / Book a free call</Eyebrow>
+        <Eyebrow tone="dark">Contact / Book a free consultation</Eyebrow>
         <SplitHeading id="contact-heading" className="text-display font-semibold text-white">
           Let’s find your next thread.
         </SplitHeading>
         <p data-intro="fade" className="max-w-[640px] text-[16px] leading-[1.6] text-muted-dark">
-          Tell us a little about your business and what you have in mind. We’ll use your free call to understand the
+          Tell us a little about your business and what you have in mind. We’ll use your free consultation to understand the
           project and explore the right starting point.
         </p>
       </Section>
@@ -32,11 +32,11 @@ export default function ContactPage() {
             </h2>
 
             {/* ▶ TALLY FORM EMBED: set `tallyFormId` in lib/site.ts */}
-            <TallyEmbed formId={site.tallyFormId} title="Book a free call" />
+            <TallyEmbed formId={site.tallyFormId} title="Book a free consultation" />
 
             {site.tallyFormId && (
               <p className="text-[13px] leading-[1.5] text-muted">
-                We’ll only use these details to respond to your enquiry and arrange your call.
+                We’ll only use these details to respond to your enquiry and arrange your consultation.
               </p>
             )}
           </div>

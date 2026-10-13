@@ -219,7 +219,7 @@ export default function MobileMenu({ open, onClose, toggle }: MobileMenuProps) {
         </ul>
         <div data-menu-tail className="mt-10">
           <MagneticButton href={bookCallHref} transitionIgnore className="w-full">
-            Book a free call
+            Book a free consultation
           </MagneticButton>
         </div>
         <div data-menu-tail className="mt-8">

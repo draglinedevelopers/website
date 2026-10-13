@@ -14,7 +14,7 @@ const loadEmbeds = () => (window as TallyWindow).Tally?.loadEmbeds();
  * email instead (no placeholder is shown on the live site). Fields in the Figma design, for building the Tally form:
  * Name, Business name, Email, WhatsApp number (include country code), Service needed
  * (Website in 14 Days / App Design Sprint / Monthly Care Plan / Not sure yet), Budget range,
- * Project details. Submit label: "Book my free call".
+ * Project details. Submit label: "Book my free consultation".
  */
 export default function TallyEmbed({ formId, title }: { formId: string; title: string }) {
   // After client-side navigation the script is already loaded, so re-scan for the iframe.
@@ -26,7 +26,7 @@ export default function TallyEmbed({ formId, title }: { formId: string; title: s
     return (
       <div data-tally-slot className="flex flex-col items-start gap-6 border border-line p-6 lg:p-8">
         <p className="text-[16px] leading-[1.6] text-muted">
-          Email us a few lines about your business and what you need. We’ll reply to arrange your free call.
+          Email us a few lines about your business and what you need. We’ll reply to arrange your free consultation.
         </p>
         <Button href={`mailto:${site.email}?subject=${encodeURIComponent(title)}`} className="w-full lg:w-auto">
           Email us

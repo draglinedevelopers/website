@@ -30,7 +30,7 @@ export default async function WorkPage() {
         ) : (
           // Shown until the first project is completed in the CMS (unfinished projects stay hidden).
           <p className="max-w-[600px] text-[18px] leading-[1.5] text-muted">
-            Case studies are on their way. In the meantime, book a free call and we’ll talk you through our work.
+            Case studies are on their way. In the meantime, book a free consultation and we’ll talk you through our work.
           </p>
         )}
       </Section>

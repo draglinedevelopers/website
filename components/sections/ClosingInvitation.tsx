@@ -13,7 +13,7 @@ export default function ClosingInvitation() {
         {/* Wrapper takes the scroll reveal so the button's own transform is free for the magnetic effect. */}
         <div className="lg:shrink-0">
           <MagneticButton href={bookCallHref} className="w-full lg:w-auto">
-            Book a free call
+            Book a free consultation
           </MagneticButton>
         </div>
       </div>

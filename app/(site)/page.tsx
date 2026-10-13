@@ -17,7 +17,7 @@ import { bookCallHref } from "@/lib/site";
 const promises = ["Fixed scope", "Fixed price", "On time"];
 
 const steps = [
-  { title: "Free call", body: "Tell us about your business, your goals and what you need next." },
+  { title: "Free consultation", body: "Tell us about your business, your goals and what you need next." },
   { title: "Proposal and deposit", body: "Agree the scope, price and schedule. A deposit gets work started." },
   { title: "Design and build", body: "We turn the agreed direction into a considered, working experience." },
   { title: "Launch and handover", body: "We launch together and show you how to manage what we’ve built." },
@@ -44,7 +44,7 @@ export default async function HomePage() {
             </p>
             <div data-intro="fade" className="flex flex-col gap-3 lg:flex-row">
               <MagneticButton href={bookCallHref} className="w-full lg:w-auto">
-                Book a free call
+                Book a free consultation
               </MagneticButton>
               <Button href="/work" variant="secondary-dark" className="w-full lg:w-auto">
                 See our work
